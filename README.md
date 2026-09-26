@@ -21,7 +21,7 @@ are required. All links also work under a GitHub Pages repository subpath.
   from the manuscript tables, not inferred from selected recordings.
 - A conceptual, animated action-partition field and chunk-boundary schematic.
   These are explanatory visuals, not scientific measurements.
-- Downloadable manuscript, offline video supplement, and structured results.
+- Downloadable manuscript and structured results; paired videos play on the page.
 - Keyboard navigation, mobile layouts, reduced-motion support, locally hosted fonts.
 
 This is the **website repository**, not the training implementation. It does not
