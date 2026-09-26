@@ -1,0 +1,14 @@
+{
+  "name": "flexiworld-project-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The FlexiWorld research project page. Static and GitHub Pages ready.",
+  "scripts": {
+    "test": "node scripts/check-site.cjs",
+    "assets": "node scripts/prepare-assets.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.58.2",
+    "pngjs": "7.0.0"
+  }
+}

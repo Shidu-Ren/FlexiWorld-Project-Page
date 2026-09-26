@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121411" />
+    <meta
+      name="description"
+      content="FlexiWorld learns and plans across multiple time scales with flexible action chunks. Explore the research, recorded comparisons, and benchmark results."
+    />
+    <meta
+      property="og:title"
+      content="FlexiWorld | Learning and Planning Across Time Scales"
+    />
+    <meta
+      property="og:description"
+      content="One world model. Flexible action chunks. Explore FlexiWorld's methods and real recorded benchmark rollouts."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shidu-ren.github.io/flexiworld/" />
+    <meta property="og:image" content="https://shidu-ren.github.io/flexiworld/assets/social-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://shidu-ren.github.io/flexiworld/" />
+    <title>FlexiWorld | Learning and Planning Across Time Scales</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="assets/lucide.min.js"></script>
+    <script defer src="assets/research-data.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#overview">Skip to research</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="FlexiWorld home"
+        ><span class="brand-mark" aria-hidden="true"><b></b><b></b><b></b></span
+        >FlexiWorld<span class="brand-period">.</span></a
+      >
+      <nav aria-label="Main navigation" id="navigation">
+        <a href="#overview">Overview</a><a href="#rollouts">Rollouts</a
+        ><a href="#method">Method</a><a href="#results">Results</a>
+      </nav>
+      <a
+        class="nav-paper"
+        href="assets/flexiworld-paper.pdf"
+        target="_blank"
+        rel="noopener"
+        >Read paper <i data-lucide="arrow-up-right"></i
+      ></a>
+      <button
+        class="icon-button menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation"
+        aria-controls="navigation"
+        aria-expanded="false"
+        title="Open navigation"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="reading-progress" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-content">
+          <div class="eyebrow hero-eyebrow">
+            <span class="status-dot"></span> JOINT EMBEDDING PREDICTIVE
+            ARCHITECTURES <span class="hero-year">RESEARCH / 2026</span>
+          </div>
+          <h1 id="hero-title">
+            Flexi<span>World</span><span class="title-period">.</span>
+          </h1>
+          <p class="paper-title">
+            Learning and Planning via Flexible Action Chunks<br
+              class="desktop-break"
+            />
+            Across Multiple Time Scales
+          </p>
+          <div class="people" aria-label="Authors">
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Shidu_Ren1"
+                target="_blank"
+                rel="noopener"
+                >Shidu Ren<sup>1,*</sup></a
+              >
+              <span class="lead-label">Project Lead</span></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Qilin_Gu2"
+                target="_blank"
+                rel="noopener"
+                >Qilin Gu<sup>1,*</sup></a
+              ></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Zhenghao_Ni1"
+                target="_blank"
+                rel="noopener"
+                >Zhenghao Ni<sup>1,*</sup></a
+              ></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Junhan_Sun1"
+                target="_blank"
+                rel="noopener"
+                >Junhan Sun<sup>2</sup></a
+              ></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Jiaqi_Wang8"
+                target="_blank"
+                rel="noopener"
+                >Jiaqi Wang<sup>3</sup></a
+              ></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Damien_Scieur3"
+                target="_blank"
+                rel="noopener"
+                >Damien Scieur<sup>4,6</sup></a
+              ></span
+            >
+            <span class="person"
+              ><a
+                href="https://openreview.net/profile?id=~Yunze_Liu2"
+                target="_blank"
+                rel="noopener"
+                >Yunze Liu<sup>5</sup></a
+              ></span
+            >
+          </div>
+          <div class="affiliations">
+            <span><sup>1</sup> University of Toronto</span
+            ><span><sup>2</sup> Zhejiang University</span
+            ><span><sup>3</sup> Tencent</span><span><sup>4</sup> Samsung</span
+            ><span><sup>5</sup> Tsinghua University</span
+            ><span><sup>6</sup> Mila &amp; Université de Montréal</span>
+          </div>
+          <p class="equal-contribution">* Equal Contribution</p>
+          <div class="hero-links">
+            <a
+              class="button button-lime"
+              href="assets/flexiworld-paper.pdf"
+              target="_blank"
+              rel="noopener"
+              ><i data-lucide="file-text"></i> Paper
+              <i data-lucide="arrow-up-right"></i
+            ></a>
+            <a class="button button-dark" href="#rollouts"
+              ><i data-lucide="play"></i> Explore rollouts</a
+            >
+            <a
+              class="button button-dark"
+              href="assets/flexiworld-supplement.zip"
+              download
+              ><i data-lucide="download"></i> Supplement</a
+            >
+          </div>
+        </div>
+        <div
+          class="hero-field"
+          aria-label="Recorded execution across four benchmarks"
+        >
+          <div class="hero-films" id="hero-films"></div>
+          <div class="hero-media-footer">
+            <span
+              ><span class="tiny-cross">+</span> FOUR WORLDS. ONE RESEARCH
+              FRAMEWORK.</span
+            ><button
+              class="icon-button"
+              id="hero-motion"
+              aria-label="Pause background videos"
+              title="Pause background videos"
+            >
+              <i data-lucide="pause"></i></button
+            ><a href="#overview" aria-label="Discover the research"
+              ><i data-lucide="arrow-down"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-band" aria-label="Research highlights">
+        <div class="metric">
+          <span class="metric-value">89.29<span>%</span></span
+          ><span class="metric-label">Mean success with ARCEM</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">+5.31<span>pp</span></span
+          ><span class="metric-label">Over the strongest baseline</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">1.3<span>×</span></span
+          ><span class="metric-label">Faster planning at D = 50</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">0</span
+          ><span class="metric-label">Retraining to switch chunk length</span>
+        </div>
+      </section>
+
+      <section class="section overview" id="overview">
+        <div class="section-top">
+          <span class="eyebrow">01 / THE IDEA</span
+          ><span class="section-tag">Think beyond a fixed step</span>
+        </div>
+        <div class="overview-heading reveal">
+          <h2>A world model.<br />More than one tempo.</h2>
+          <div class="overview-copy">
+            <p>
+              Goals can be far away. Actions do not have to come in one fixed
+              length.
+            </p>
+            <p>
+              FlexiWorld learns latent dynamics and goal-conditioned action
+              generation together, using variable-length action chunks and
+              multiple goal spans. The same trained model can plan at different
+              temporal resolutions.
+            </p>
+          </div>
+        </div>
+        <div class="idea-grid">
+          <article class="idea reveal">
+            <span class="idea-number">01</span
+            ><i data-lucide="move-horizontal"></i>
+            <h3>Learn across time scales</h3>
+            <p>
+              Random partitions expose prediction and action generation to
+              transitions of different durations.
+            </p>
+          </article>
+          <article class="idea reveal">
+            <span class="idea-number">02</span><i data-lucide="waypoints"></i>
+            <h3>Generate, then refine</h3>
+            <p>
+              An autoregressive actor enables Direct control. ARCEM searches
+              residuals around its conditional outputs.
+            </p>
+          </article>
+          <article class="idea reveal">
+            <span class="idea-number">03</span
+            ><i data-lucide="sliders-horizontal"></i>
+            <h3>Change the granularity</h3>
+            <p>
+              Five- or ten-action chunks trade planning computation for temporal
+              resolution, without retraining.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="rollouts-section section" id="rollouts">
+        <div class="section-top">
+          <span class="eyebrow">02 / RECORDED EXECUTION</span
+          ><span class="section-tag">Matched starts. Matched goals.</span>
+        </div>
+        <div class="heading-row reveal">
+          <h2>Same goal.<br />Different outcomes.</h2>
+          <p>
+            Watch FlexiWorld and INTACT pursue the same visual goal. Every frame
+            below comes from the recorded benchmark evaluations.
+          </p>
+        </div>
+        <div
+          class="task-tabs"
+          role="tablist"
+          aria-label="Rollout benchmark"
+          id="task-tabs"
+        ></div>
+        <div
+          class="rollout-panel"
+          role="tabpanel"
+          id="rollout-panel"
+          aria-labelledby="task-pusht"
+        >
+          <div class="case-heading">
+            <div>
+              <div class="eyebrow" id="case-meta"></div>
+              <h3 id="case-title"></h3>
+              <p id="case-description"></p>
+            </div>
+            <button
+              class="goal-button"
+              id="goal-button"
+              aria-label="Enlarge shared goal"
+              title="Enlarge shared goal"
+            >
+              <img id="shared-goal" alt="Shared goal observation" /><span
+                >GOAL <i data-lucide="expand"></i
+              ></span>
+            </button>
+          </div>
+          <div class="players" id="players"></div>
+          <div class="playback-controls">
+            <button
+              class="icon-button play-button"
+              id="play-all"
+              aria-label="Play all recordings"
+              title="Play all recordings"
+            >
+              <i data-lucide="play"></i>
+            </button>
+            <button
+              class="icon-button"
+              id="restart"
+              aria-label="Restart recordings"
+              title="Restart recordings"
+            >
+              <i data-lucide="rotate-ccw"></i>
+            </button>
+            <div class="timeline-wrap">
+              <input
+                type="range"
+                id="timeline"
+                aria-label="Execution step"
+                min="0"
+                max="150"
+                value="0"
+                step="1"
+              />
+              <div class="timeline-labels">
+                <span>INITIAL OBSERVATION</span
+                ><span id="phase">FIRST PLAN</span
+                ><output id="frame-count">0 / 150</output>
+              </div>
+            </div>
+            <label class="speed-label"
+              ><span class="sr-only">Playback speed</span
+              ><select id="speed">
+                <option value="0.5">0.5×</option>
+                <option value="1" selected>1×</option>
+                <option value="2">2×</option>
+              </select></label
+            >
+            <div class="case-switch">
+              <button
+                class="icon-button"
+                id="previous-case"
+                aria-label="Previous case"
+                title="Previous case"
+              >
+                <i data-lucide="arrow-left"></i></button
+              ><output id="case-count">01 / 03</output
+              ><button
+                class="icon-button"
+                id="next-case"
+                aria-label="Next case"
+                title="Next case"
+              >
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          <p id="media-error" class="error-message" role="alert" hidden>
+            One or more recordings could not load.
+            <button id="retry-media">Retry recordings</button>
+          </p>
+        </div>
+        <p class="figure-note">
+          Selected qualitative cases, not an estimate of average performance.
+          The expert video is a dataset reference, not an evaluated planner.
+          Goal frames and early terminal states are held. Playback speed does
+          not represent planning latency.
+          <a href="assets/recording-manifest.json" download
+            >Recording metadata <i data-lucide="arrow-down-to-line"></i
+          ></a>
+        </p>
+      </section>
+
+      <section class="method-section section" id="method">
+        <div class="section-top">
+          <span class="eyebrow">03 / HOW IT WORKS</span
+          ><span class="section-tag"
+            >Predict in latent space. Act in the world.</span
+          >
+        </div>
+        <div class="heading-row reveal">
+          <h2>Flexible by training.<br />Autoregressive by design.</h2>
+          <p>
+            A causal action encoder handles variable-length chunks. An
+            autoregressive actor generates primitive actions, and Student
+            Forcing exposes it to generated prefixes during training.
+          </p>
+        </div>
+        <figure class="paper-figure reveal">
+          <button
+            class="image-zoom"
+            data-image="assets/training.png"
+            data-caption="FlexiWorld training architecture"
+            aria-label="Enlarge training architecture"
+          >
+            <img
+              src="assets/training.png"
+              alt="FlexiWorld architecture: variable-duration transitions, causal action encoding, latent prediction, and autoregressive action generation"
+              loading="lazy"
+            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
+          </button>
+          <figcaption>
+            <span>JOINT TRAINING</span> Variable-length transitions couple the
+            action encoder, latent predictor, and goal-conditioned actor.
+          </figcaption>
+        </figure>
+
+        <div class="chunk-explorer reveal">
+          <div class="chunk-intro">
+            <span class="eyebrow">PLANNING GRANULARITY</span>
+            <h3>Same horizon.<br />Fewer prediction steps.</h3>
+            <p>
+              For a 25-action plan, ten-action chunks use a final five-action
+              chunk. This changes imagined transitions, not the schedule for
+              real observations.
+            </p>
+            <div
+              class="segmented"
+              role="group"
+              aria-label="Planning chunk length"
+            >
+              <button class="active" data-chunk="5" aria-pressed="true">
+                k = 5</button
+              ><button data-chunk="10" aria-pressed="false">k = 10</button>
+            </div>
+          </div>
+          <div class="chunk-visual">
+            <div class="chunk-visual-heading">
+              <span>25 PRIMITIVE ACTIONS</span>
+              <div>
+                <button
+                  class="icon-button"
+                  id="chunk-play"
+                  aria-label="Pause chunk animation"
+                  title="Pause chunk animation"
+                >
+                  <i data-lucide="pause"></i>
+                </button>
+              </div>
+            </div>
+            <div
+              class="action-ribbon"
+              id="action-ribbon"
+              aria-label="Action chunks and latent prediction boundaries"
+            ></div>
+            <div class="chunk-axis">
+              <span>INITIAL STATE</span><span>GOAL HORIZON</span>
+            </div>
+            <div class="chunk-readout">
+              <div>
+                <strong id="predictor-count">5</strong
+                ><span>latent predictions</span>
+              </div>
+              <div><strong>25</strong><span>primitive actions</span></div>
+              <div><strong>0</strong><span>additional training</span></div>
+            </div>
+            <p class="small-note">
+              Schematic of chunk boundaries, not a simulated rollout or latency
+              measurement.
+            </p>
+          </div>
+        </div>
+
+        <div class="arcem-story reveal">
+          <span class="eyebrow">ACTOR-RESIDUAL CROSS-ENTROPY METHOD</span>
+          <h3>Refine actions.<br />Let later actions respond.</h3>
+          <p>
+            ARCEM generalizes POPLIN's action-residual replanning to
+            autoregressive chunks. Each perturbed action becomes part of the
+            prefix for subsequent actions; latent predictions carry its effects
+            across chunks.
+          </p>
+          <div class="arcem-steps">
+            <span><b>01</b> Sample residuals</span
+            ><i data-lucide="arrow-right"></i
+            ><span><b>02</b> Generate candidates</span
+            ><i data-lucide="arrow-right"></i
+            ><span><b>03</b> Score &amp; refit</span>
+          </div>
+        </div>
+        <figure class="paper-figure reveal">
+          <button
+            class="image-zoom"
+            data-image="assets/arcem.png"
+            data-caption="ARCEM candidate generation and refinement"
+            aria-label="Enlarge ARCEM architecture"
+          >
+            <img
+              src="assets/arcem.png"
+              alt="ARCEM: action residuals affect subsequent autoregressive actions; latent goal costs select elites for CEM refinement"
+              loading="lazy"
+            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
+          </button>
+          <figcaption>
+            <span>TEST-TIME SEARCH</span> Within-chunk action feedback.
+            Chunk-level latent prediction. No residual-policy training.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="results-section section" id="results">
+        <div class="section-top">
+          <span class="eyebrow">04 / THE EVIDENCE</span
+          ><span class="section-tag"
+            >Four benchmarks. Four goal distances.</span
+          >
+        </div>
+        <div class="heading-row reveal">
+          <h2>Go further.<br />Stay goal-directed.</h2>
+          <p>
+            Visual goal-reaching on PushT, Cube, Reacher, and TwoRoom, evaluated
+            over 25, 50, 75, and 100 primitive steps with up to one replan.
+          </p>
+        </div>
+        <div class="results-toolbar">
+          <div class="segmented" role="group" aria-label="Result comparison">
+            <button
+              data-comparison="baselines"
+              class="active"
+              aria-pressed="true"
+            >
+              World models</button
+            ><button data-comparison="planners" aria-pressed="false">
+              FlexiWorld planners
+            </button>
+          </div>
+          <label class="select-label"
+            >BENCHMARK
+            <select id="result-task">
+              <option value="4">Four-task average</option>
+              <option value="0">PushT</option>
+              <option value="1">Cube</option>
+              <option value="2">Reacher</option>
+              <option value="3">TwoRoom</option>
+            </select></label
+          >
+        </div>
+        <div
+          class="results-chart"
+          id="results-chart"
+          role="img"
+          aria-label="Benchmark success rates"
+        ></div>
+        <div class="chart-axis" aria-hidden="true">
+          <span>0</span><span>25</span><span>50</span><span>75</span
+          ><span>100%</span>
+        </div>
+        <p class="figure-note">
+          Main-paper results. FlexiWorld uses three training seeds; baselines
+          use one checkpoint per task. All use three evaluation seeds and 100
+          episodes per distance and evaluation seed. Error values are sample SD:
+          across training seeds for FlexiWorld, across evaluation seeds for
+          baselines. INTACT's main-table configuration is Guarded-A.
+          Task-specific outcomes vary.
+        </p>
+        <details class="results-details">
+          <summary>Full benchmark table <i data-lucide="plus"></i></summary>
+          <div class="table-scroll">
+            <table id="results-table">
+              <caption>
+                Success rate (%), mean ± sample SD
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">PushT</th>
+                  <th scope="col">Cube</th>
+                  <th scope="col">Reacher</th>
+                  <th scope="col">TwoRoom</th>
+                  <th scope="col">Average</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </details>
+
+        <div class="latency-block reveal">
+          <div>
+            <span class="eyebrow">WITHOUT RETRAINING</span>
+            <h3>Trade granularity<br />for planning speed.</h3>
+            <p>
+              Longer chunks make fewer latent predictions. At D = 50, ARCEM
+              planning is approximately 1.3× faster, with comparable four-task
+              mean success in the matched chunk-length study.
+            </p>
+            <div
+              class="segmented distances"
+              role="group"
+              aria-label="Latency goal distance"
+            >
+              <button data-distance="25" aria-pressed="false">D = 25</button
+              ><button data-distance="50" class="active" aria-pressed="true">
+                50</button
+              ><button data-distance="75" aria-pressed="false">75</button
+              ><button data-distance="100" aria-pressed="false">100</button>
+            </div>
+          </div>
+          <div
+            class="latency-comparison"
+            id="latency-comparison"
+            aria-live="polite"
+          ></div>
+        </div>
+        <p class="figure-note">
+          Matched timing inputs, including encoding and planning but excluding
+          environment execution. Each input uses the median of 20 synchronized
+          solves after warm-up. These latency measurements are separate from the
+          selected videos and main-table success evaluations.
+        </p>
+      </section>
+
+      <section class="abstract-section section" id="abstract">
+        <div class="section-top">
+          <span class="eyebrow">05 / IN THE PAPER</span
+          ><span class="section-tag">The full picture</span>
+        </div>
+        <div class="abstract-layout">
+          <h2>Abstract</h2>
+          <p>
+            Latent world models predict future states for goal-directed planning
+            using action chunks spanning multiple primitive steps. Existing
+            methods typically use fixed-length chunks and either omit
+            goal-conditioned action generation or limit their supervision to
+            short goal spans. We introduce FlexiWorld, a JEPA-based world model
+            that combines long-horizon goal supervision with variable-length
+            action chunks to improve long-horizon control. During training, we
+            sample varying goal spans and randomly partition the actions into
+            variable-length chunks. We jointly train the world model with a
+            causal action encoder that embeds variable-length chunks and an
+            autoregressive actor that generates primitive actions sequentially.
+            Student Forcing reduces exposure bias by training on generated
+            action prefixes. For planning, Actor-Residual Cross-Entropy Method
+            (ARCEM) generalizes POPLIN's action-residual search with feedback
+            within autoregressive chunks. Across four benchmarks and goal
+            distances, FlexiWorld with ARCEM achieves 89.29% mean success,
+            compared with 83.98% for the strongest baseline. PushT ablations
+            show improved direct control from long-horizon supervision,
+            variable-length chunks, and Student Forcing. Without retraining,
+            FlexiWorld supports different planning chunk lengths: longer chunks
+            accelerate ARCEM by approximately 1.3× while maintaining comparable
+            average success.
+          </p>
+        </div>
+      </section>
+
+      <section class="resources-section section" id="resources">
+        <div class="section-top">
+          <span class="eyebrow">06 / EXPLORE THE RESEARCH</span
+          ><span class="section-tag">FlexiWorld</span>
+        </div>
+        <h2>Take a closer look.</h2>
+        <div class="resource-links">
+          <a href="assets/flexiworld-paper.pdf" target="_blank" rel="noopener"
+            ><i data-lucide="file-text"></i>
+            <div>
+              <h3>Research paper</h3>
+              <p>Method, experiments &amp; appendix</p>
+            </div>
+            <i data-lucide="arrow-up-right"></i></a
+          ><a href="assets/flexiworld-supplement.zip" download
+            ><i data-lucide="film"></i>
+            <div>
+              <h3>Video supplement</h3>
+              <p>Offline paired rollout gallery</p>
+            </div>
+            <i data-lucide="download"></i></a
+          ><a href="assets/results.json" download
+            ><i data-lucide="database"></i>
+            <div>
+              <h3>Result data</h3>
+              <p>Reported metrics &amp; case metadata</p>
+            </div>
+            <i data-lucide="download"></i
+          ></a>
+        </div>
+        <div class="citation">
+          <div class="citation-heading">
+            <h3>Citation</h3>
+            <button
+              class="icon-button"
+              id="copy-citation"
+              aria-label="Copy BibTeX citation"
+              title="Copy BibTeX citation"
+            >
+              <i data-lucide="copy"></i></button
+            ><span id="copy-status" role="status"></span>
+          </div>
+          <pre><code id="citation-text">@misc{ren2026flexiworld,
+  title = {FlexiWorld: Learning and Planning via Flexible Action Chunks
+           Across Multiple Time Scales},
+  author = {Shidu Ren and Qilin Gu and Zhenghao Ni and Junhan Sun
+            and Jiaqi Wang and Damien Scieur and Yunze Liu},
+  year = {2026},
+  howpublished = {Manuscript}
+}</code></pre>
+        </div>
+        <div class="research-note">
+          <i data-lucide="scan-eye"></i>
+          <p>
+            Evaluated in offline-trained simulation settings. The recorded cases
+            illustrate execution behavior; they do not establish real-world
+            deployment safety.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a class="brand" href="#top"
+        >FlexiWorld<span class="brand-period">.</span></a
+      >
+      <p>Learning and planning across time scales.</p>
+      <a href="#top" class="back-top"
+        >Back to top <i data-lucide="arrow-up-right"></i
+      ></a>
+      <div class="footer-bottom">
+        <span>RESEARCH / 2026</span
+        ><span>Shidu Ren <span class="footer-lead">Project Lead</span></span
+        ><a href="assets/provenance.json" download>Asset provenance</a>
+      </div>
+    </footer>
+    <dialog id="image-dialog">
+      <div class="dialog-heading">
+        <p id="dialog-caption"></p>
+        <button
+          class="icon-button"
+          id="close-dialog"
+          aria-label="Close image"
+          title="Close image"
+        >
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <img id="dialog-image" alt="" />
+    </dialog>
+    <noscript
+      ><p class="noscript">
+        The paper and downloads are available without JavaScript. Interactive
+        comparisons require JavaScript.
+      </p></noscript
+    >
+  </body>
+</html>
