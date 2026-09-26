@@ -1,0 +1,42 @@
+{
+  "manuscriptCommit": "2d0ff24a9d37371218e1ac0d79c8d65cc6d065b3",
+  "files": {
+    "teaser.png": {
+      "source": "figures/flexiworld-teaser.pdf",
+      "sourceSha256": "5508146018112b05eda2362c89302f7f71b52ba73b24a7cedf1080c402872cbd",
+      "sha256": "55d16477deee0cd6a23f8d2e0432d05acc5dcf23ee25ce8ffcc61e3ef81a1ffc"
+    },
+    "training.png": {
+      "source": "figures/odyssey-training.pdf",
+      "sourceSha256": "c61f53b69dfb919ac1069e675ad9647301bbb02ab2fee5b34b3816b5aa6e4269",
+      "sha256": "8eb3686ba6c4f6a2001948f86a0992004f29f42e6a18348df674c1c0ccb2a1aa"
+    },
+    "arcem.png": {
+      "source": "figures/odyssey-arcem.pdf",
+      "sourceSha256": "a9551c66acf7369f997ab51cd327d9aeba39098e7207d76d4017ae1e735e8016",
+      "sha256": "d151f80ec169014edc2c042e1ec8e62d417f28930c1ed4b9c950be46c6b290bd"
+    },
+    "action-diagnostics.png": {
+      "source": "figures/action_diagnostics.pdf",
+      "sourceSha256": "d49707ebc3610aa3609f0b45c7c642fdc409344cabddf9c05431d89d1001bd7d",
+      "sha256": "95763b97c9938a6769103f26034afb50be619a42cb5b608721945f6a7fc6eaea"
+    },
+    "frozen-probes.png": {
+      "source": "figures/appendix_dynamics_probes.pdf",
+      "sourceSha256": "6e191d924184f18772f1d96eab764b5cb15d6b1a9c47ad274ce505894ac02b3f",
+      "sha256": "f16c8cf10114d15fd6a69d2c1453d118ad766433724f40631c02ab5145ab3ed8"
+    },
+    "paired-recovery.png": {
+      "source": "figures/appendix_recovery.pdf",
+      "sourceSha256": "febcb07f424f36da0e78487a3d64b1debd66f37b0d3ac9dbca37b36687d3915b",
+      "sha256": "1ca5eab129875da08ca5d1c34fa6f793bd1bbb74b70a381ecf41f842ecd3483d"
+    }
+  },
+  "abstract": "Latent world models predict future states for goal-directed planning using action chunks spanning multiple primitive steps. Existing methods typically use fixed-length chunks and either omit goal-conditioned action generation or limit their supervision to short goal spans. We introduce FlexiWorld, a JEPA-based world model that combines mixed-span goal supervision with variable-length action chunks to improve long-horizon control. During training, we sample varying goal spans and randomly partition the actions into variable-length chunks. We jointly train the world model with a causal action encoder that embeds variable-length chunks and an autoregressive actor that generates primitive actions sequentially. Student Forcing reduces exposure bias by training on generated action prefixes. For planning, Actor-Residual Cross-Entropy Method (ARCEM) combines action-residual search with within-chunk autoregressive feedback and chunk-boundary latent prediction. Across four benchmarks and goal distances, FlexiWorld with ARCEM achieves 89.29% mean success, compared with 83.98% for the strongest baseline. PushT ablations show improved direct control from mixed-span supervision, variable-length chunks, and Student Forcing. Without retraining, FlexiWorld supports different planning chunk lengths: longer chunks accelerate ARCEM by approximately 1.3\u00d7 on average while maintaining comparable average success.",
+  "textSources": {
+    "iclr2027_conference.tex": "b143d60a01cb9e0d2f2b9f826063ab9acce0ac581eaf6369d2e038a015775b70",
+    "appendix/experimental_details.tex": "3b687fdf53bfa8e9fbd20339081509d60ea4fb2fd919cb0cab964d0bbb9b81f6",
+    "appendix/failure_modes.tex": "603a57cde958f77c5dbb56b2fad2413c49d7731ca5433e3389444a7d60fe5ded",
+    "sections/experiments.tex": "27e005f715a173a9117ba258d6d073cf7b7a98ab1f78eeb4ac3d333f38070a1b"
+  }
+}

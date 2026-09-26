@@ -810,7 +810,7 @@ nav a:hover:after {
 }
 .image-zoom > img {
   width: 100%;
-  max-height: 580px;
+  height: auto;
   object-fit: contain;
 }
 .zoom-icon {
@@ -2449,10 +2449,15 @@ dialog.goal-modal img {
 
 /* A content-led masthead keeps recordings in the comparison section. */
 .paper-header {
-  background: var(--paper);
+  background: #151714;
+  color: #fff;
+  position: relative;
+  isolation: isolate;
   padding: 58px 32px 46px;
 }
 .paper-header-content {
+  position: relative;
+  z-index: 1;
   max-width: 1120px;
   margin: auto;
   text-align: center;
@@ -2464,7 +2469,7 @@ dialog.goal-modal img {
   text-wrap: balance;
 }
 .paper-name {
-  color: var(--green);
+  color: var(--lime);
   white-space: nowrap;
 }
 .paper-header .people {
@@ -2474,24 +2479,24 @@ dialog.goal-modal img {
   font-size: 16px;
 }
 .paper-header .person a:hover {
-  color: var(--green);
+  color: var(--lime);
 }
 .paper-header .person sup {
-  color: var(--muted);
+  color: #b7c99d;
   font-size: 11px;
 }
 .paper-header .affiliations {
   max-width: 960px;
   margin-top: 16px;
   gap: 5px 20px;
-  color: var(--muted);
+  color: #bbc5b2;
   font-size: 14px;
 }
 .paper-header .affiliations sup {
   font-size: 10px;
 }
 .paper-header .author-notes {
-  color: var(--muted);
+  color: #bbc5b2;
   margin-top: 12px;
   font-size: 12px;
 }
@@ -2500,13 +2505,79 @@ dialog.goal-modal img {
   gap: 10px;
 }
 .paper-header .button-dark {
-  background: var(--paper);
-  border-color: var(--line);
-  color: var(--ink);
+  background: #23281f;
+  border-color: #46503e;
+  color: #edf2e6;
 }
 .paper-header .button-dark:hover {
+  background: #30382a;
+  border-color: #849773;
+}
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-toggle {
+  position: absolute;
+  bottom: 6px;
+  right: 12px;
+  z-index: 2;
+  color: #bbc5b2;
+  width: 32px;
+  height: 32px;
+}
+.ambient-toggle:hover {
+  background: #30382a;
+}
+.abstract-section {
   background: var(--wash);
-  border-color: #adb8a8;
+}
+.abstract-section .section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.abstract-section .section-tag .lucide {
+  width: 14px;
+  height: 14px;
+}
+.diagnostics-section {
+  background: #f7f8f6;
+}
+.diagnostic-study {
+  padding-top: 48px;
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.diagnostic-heading {
+  max-width: 900px;
+}
+.diagnostic-heading .eyebrow {
+  color: var(--green);
+}
+.diagnostic-heading h3 {
+  margin: 12px 0 16px;
+  font-size: 29px;
+  text-wrap: balance;
+}
+.diagnostic-heading p,
+.diagnostic-context {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.diagnostic-context {
+  max-width: 960px;
+  margin-top: 24px;
+  padding-left: 18px;
+  border-left: 2px solid var(--green);
+}
+.diagnostic-context strong {
+  color: var(--ink);
 }
 @media (max-width: 760px) {
   .paper-header {
@@ -2532,5 +2603,16 @@ dialog.goal-modal img {
   .paper-header .hero-links {
     margin-top: 22px;
     gap: 8px;
+  }
+  .diagnostic-study {
+    padding-top: 30px;
+    margin-top: 30px;
+  }
+  .diagnostic-heading h3 {
+    font-size: 23px;
+  }
+  .diagnostic-heading p,
+  .diagnostic-context {
+    font-size: 14px;
   }
 }

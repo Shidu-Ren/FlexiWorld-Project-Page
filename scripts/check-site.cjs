@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const assert = require("node:assert/strict");
+const crypto = require("node:crypto");
 const { chromium } = require("playwright");
 const { PNG } = require("pngjs");
 const root = path.resolve(__dirname, "..");
@@ -10,6 +11,7 @@ const data = JSON.parse(
   fs.readFileSync(path.join(root, "assets/results.json")),
 );
 fs.mkdirSync(output, { recursive: true });
+const paper = JSON.parse(fs.readFileSync(path.join(root, "assets/paper-content.json")));
 let browser;
 
 async function main() {
@@ -84,7 +86,24 @@ async function main() {
     } else if (!/^https?:|^data:/.test(url))
       assert(fs.existsSync(path.join(root, url)), `Missing file ${url}`);
   }
-  assert.equal(await page.locator("#top video, #top canvas").count(), 0);
+  assert.equal(await page.locator("#top video").count(), 0);
+  assert.equal(await page.locator("#top canvas").count(), 1);
+  assert.equal(await page.locator("#top").evaluate((e) => getComputedStyle(e).backgroundColor), "rgb(21, 23, 20)");
+  assert.equal((await page.locator("#paper-abstract").textContent()).replace(/\s+/g, " ").trim(), paper.abstract);
+  assert.equal(await page.locator(".paper-figure").count(), 6);
+  assert.equal(await page.locator(".diagnostic-study").count(), 3);
+  for (const [name, evidence] of Object.entries(paper.files)) {
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(root, "assets", name))).digest("hex");
+    assert.equal(hash, evidence.sha256, `Paper figure changed: ${name}`);
+  }
+  const ambientBefore = await page.locator("#hero-canvas").evaluate((e) => e.toDataURL());
+  await page.waitForTimeout(350);
+  assert.notEqual(ambientBefore, await page.locator("#hero-canvas").evaluate((e) => e.toDataURL()), "Background is not moving");
+  await page.getByRole("button", { name: "Pause background animation", exact: true }).click();
+  const pausedFrame = await page.locator("#hero-canvas").evaluate((e) => e.toDataURL());
+  await page.waitForTimeout(150);
+  assert.equal(pausedFrame, await page.locator("#hero-canvas").evaluate((e) => e.toDataURL()), "Background did not pause");
+  await page.getByRole("button", { name: "Play background animation", exact: true }).click();
   assert(await page.locator("#players video").evaluateAll((vs) =>
     vs.every((v) => v.paused)), "Recordings must not autoplay");
 
@@ -185,6 +204,18 @@ async function main() {
     .click();
   assert(await page.getByRole("dialog").isVisible());
   await page.getByRole("button", { name: "Close image", exact: true }).click();
+  for (const figure of await page.locator(".paper-figure .image-zoom").all()) {
+    await figure.scrollIntoViewIfNeeded();
+    const img = figure.locator("img");
+    await img.evaluate((e) => e.decode());
+    const shape = await img.evaluate((e) => ({width:e.naturalWidth,height:e.naturalHeight,declaredWidth:e.width,declaredHeight:e.height}));
+    assert.equal(shape.width, 2400);
+    assert(Math.abs(shape.declaredWidth / shape.declaredHeight - shape.width / shape.height) < 0.02, "Figure aspect ratio distorted");
+    await figure.click();
+    assert(await page.getByRole("dialog").isVisible());
+    assert.equal(await page.locator("#dialog-image").getAttribute("src"), await figure.getAttribute("data-image"));
+    await page.keyboard.press("Escape");
+  }
   await page.locator('[data-chunk="10"]').click();
   assert.equal(await page.locator("#predictor-count").textContent(), "3");
   assert.equal(await page.locator(".action-cell.boundary").count(), 3);
@@ -254,6 +285,7 @@ async function main() {
       "#method",
       "#results",
       "#abstract",
+      "#diagnostics",
       "#resources",
     ]) {
       await page.locator(selector).scrollIntoViewIfNeeded();
@@ -286,6 +318,7 @@ async function main() {
       .evaluate((e) => e.classList.contains("paused")),
     true,
   );
+  assert.equal(await reduced.getByRole("button", { name: "Play background animation", exact: true }).count(), 1);
   await reduced.close();
   assert.deepEqual(errors, []);
   assert.deepEqual(failedRequests, []);

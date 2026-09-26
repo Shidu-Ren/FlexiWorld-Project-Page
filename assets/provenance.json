@@ -151,11 +151,17 @@
     "media/tworoom-041-expert.mp4": "3a208e005901a5903bde30918def758d126c170fb573b59d97e7b9482492fffc",
     "media/tworoom-041-expert-start.png": "6a057d1650bbd3689c211a9cdd7911cb8fdb3c61cca25c2778706796b53b1c76",
     "media/tworoom-041-goal.png": "797e2b2bc73a7dac927085993f055f9dd3dfa45c4ee4d325fa053e2be4513356",
-    "training.png": "6e3d5cc534e8fcdbfbe5b72550ee1d0939cfe9ddd384e8d794e21bbf79ee1674",
-    "arcem.png": "2489756605b437f877c1c86c18e7341fab40931c7912622edff8259db046adc4",
+    "training.png": "8eb3686ba6c4f6a2001948f86a0992004f29f42e6a18348df674c1c0ccb2a1aa",
+    "arcem.png": "d151f80ec169014edc2c042e1ec8e62d417f28930c1ed4b9c950be46c6b290bd",
     "flexiworld-paper.pdf": "ea0fbfd084780dc8cb2133d1d0508bb588c21d588a6ba47bb28c1306adb5cef3",
     "lucide.min.js": "ab85225ecc1daa2033607856f03dd2dabcbc08e2d260a5b97e17c690aa929766",
     "LUCIDE-LICENSE": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
-    "recording-manifest.json": "e1c88217742cd0575800509b36813386a3222ea7a5c7da1da227045dd39094cf"
-  }
+    "recording-manifest.json": "e1c88217742cd0575800509b36813386a3222ea7a5c7da1da227045dd39094cf",
+    "teaser.png": "55d16477deee0cd6a23f8d2e0432d05acc5dcf23ee25ce8ffcc61e3ef81a1ffc",
+    "action-diagnostics.png": "95763b97c9938a6769103f26034afb50be619a42cb5b608721945f6a7fc6eaea",
+    "frozen-probes.png": "f16c8cf10114d15fd6a69d2c1453d118ad766433724f40631c02ab5145ab3ed8",
+    "paired-recovery.png": "1ca5eab129875da08ca5d1c34fa6f793bd1bbb74b70a381ecf41f842ecd3483d"
+  },
+  "paperContentManifest": "paper-content.json",
+  "paperFigureCommit": "2d0ff24a9d37371218e1ac0d79c8d65cc6d065b3"
 }

@@ -410,7 +410,7 @@
     if (e.key === "Escape" && $("#navigation").classList.contains("open"))
       $("#menu-toggle").click();
   });
-  const trackedSections = $$("#overview,#rollouts,#method,#results");
+  const trackedSections = $$("#overview,#rollouts,#method,#results,#diagnostics");
   function scrollUpdate() {
     const end = document.documentElement.scrollHeight - innerHeight;
     $(".reading-progress").style.transform =
@@ -456,5 +456,72 @@
     if (motionPreference.matches) document.body.classList.remove("js-motion");
   });
 
+  // Decorative chunk traces illustrate time scales, not experimental results.
+  const canvas = $("#hero-canvas");
+  const ctx = canvas.getContext("2d");
+  let ambientPaused = motionPreference.matches;
+  let ambientVisible = true;
+  let ambientFrame = 0;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  function drawAmbient(now = 0) {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    const t = ambientPaused ? 0 : now * 0.012;
+    for (let row = 0; row < Math.ceil(canvasHeight / 56); row++) {
+      const y = 36 + row * 56;
+      ctx.strokeStyle = "rgba(178,205,137,0.075)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(24, y);
+      ctx.lineTo(canvasWidth - 24, y);
+      ctx.stroke();
+      for (let col = 0; col < Math.ceil(canvasWidth / 253); col++) {
+        const x = ((col * 253 + t * (row % 2 ? -1 : 1) + row * 79 +
+          canvasWidth * 10) % (canvasWidth + 120)) - 60;
+        const edge = Math.abs(x - canvasWidth / 2) / (canvasWidth / 2);
+        ctx.fillStyle = `rgba(${row % 3 ? "196,243,107" : "112,190,208"},${0.055 + 0.09 * edge})`;
+        ctx.fillRect(x, y - 3, [17, 34, 53, 25, 40][(row + col) % 5], 6);
+        ctx.strokeStyle = "rgba(177,206,139,0.16)";
+        ctx.beginPath();
+        ctx.moveTo(x, y - 9);
+        ctx.lineTo(x, y + 9);
+        ctx.stroke();
+      }
+    }
+    if (!ambientPaused && ambientVisible && !document.hidden)
+      ambientFrame = requestAnimationFrame(drawAmbient);
+  }
+  function updateAmbient() {
+    cancelAnimationFrame(ambientFrame);
+    const label = ambientPaused ? "Play background animation" : "Pause background animation";
+    $("#hero-motion").setAttribute("aria-label", label);
+    $("#hero-motion").title = label;
+    $("#hero-motion").innerHTML = icon(ambientPaused ? "play" : "pause");
+    icons();
+    drawAmbient(performance.now());
+  }
+  new ResizeObserver(() => {
+    const rect = $("#top").getBoundingClientRect();
+    canvasWidth = rect.width;
+    canvasHeight = rect.height;
+    const ratio = Math.min(devicePixelRatio, 2);
+    canvas.width = Math.round(canvasWidth * ratio);
+    canvas.height = Math.round(canvasHeight * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    updateAmbient();
+  }).observe($("#top"));
+  new IntersectionObserver(([entry]) => {
+    ambientVisible = entry.isIntersecting;
+    updateAmbient();
+  }).observe($("#top"));
+  $("#hero-motion").addEventListener("click", () => {
+    ambientPaused = !ambientPaused;
+    updateAmbient();
+  });
+  document.addEventListener("visibilitychange", updateAmbient);
+  motionPreference.addEventListener("change", () => {
+    ambientPaused = motionPreference.matches;
+    updateAmbient();
+  });
   icons();
 })();
