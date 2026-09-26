@@ -316,14 +316,6 @@ nav a:hover:after {
   align-items: center;
   gap: 9px;
 }
-.lead-label {
-  font-size: 10px;
-  line-height: 1.4;
-  border: 1px solid #5b6a4f;
-  padding: 3px 6px;
-  color: var(--lime);
-  border-radius: 3px;
-}
 .hero-links {
   display: flex;
   justify-content: center;
@@ -2339,10 +2331,18 @@ dialog.goal-modal img {
   pointer-events: none;
   z-index: 0;
 }
-.equal-contribution {
+.author-notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 18px;
   font-size: 10px;
+  line-height: 1.6;
   color: #a9b39f;
   margin-top: 8px;
+}
+.author-notes span {
+  white-space: nowrap;
 }
 .hero {
   height: auto;
@@ -2488,9 +2488,6 @@ dialog.goal-modal img {
   .citation-heading > span {
     font-size: 10px;
   }
-  .people .lead-label {
-    font-size: 8px;
-  }
 }
 @media (max-width: 440px) {
   .hero {
@@ -2521,9 +2518,6 @@ dialog.goal-modal img {
   }
   .hero-field {
     bottom: 12px;
-  }
-  .lead-label {
-    padding: 2px 5px;
   }
   .hero-media-footer {
     margin-top: 8px;

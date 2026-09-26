@@ -35,7 +35,17 @@ async function main() {
   );
   await page.waitForTimeout(700);
   assert.equal(await page.locator(".people .person").count(), 7);
-  assert.equal(await page.locator(".lead-label").textContent(), "Project Lead");
+  assert.equal(await page.locator(".people .lead-label").count(), 0);
+  assert.equal(
+    await page.locator(".author-notes .project-lead").textContent(),
+    "\u2020 Project Lead",
+  );
+  assert.equal(
+    await page.locator(".author-notes .corresponding-author").textContent(),
+    "\u2021 Corresponding Author",
+  );
+  assert.equal(await page.locator('.people a[href$="~Shidu_Ren1"] sup').textContent(), "1,*,\u2020");
+  assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "5,\u2021");
   assert.equal(
     await page.locator(".equal-contribution").textContent(),
     "* Equal Contribution",
