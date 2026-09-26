@@ -362,8 +362,7 @@ nav a:hover:after {
   background: #30382a;
 }
 .hero-field {
-  position: absolute;
-  inset: auto 0 0;
+  position: relative;
   z-index: 1;
 }
 .hero-films {
@@ -375,37 +374,25 @@ nav a:hover:after {
   padding: 0 32px;
 }
 .hero-film {
-  position: relative;
-  overflow: hidden;
-  height: 214px;
-  background: #242922;
-  border-radius: 0;
-}
-.hero-film:nth-child(2) {
-  transform: translateY(-9px);
-}
-.hero-film:nth-child(3) {
-  transform: translateY(4px);
+  min-width: 0;
 }
 .hero-film video {
+  display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1;
+  height: auto;
   object-fit: contain;
-  background: #eff1ee;
 }
 .hero-film-label {
-  position: absolute;
-  bottom: 6px;
-  left: 7px;
-  right: 7px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
-  background: #181d18e8;
+  gap: 8px;
+  color: #b9c2b2;
   font-size: 10px;
   line-height: 1.4;
-  padding: 5px 7px;
+  min-height: 28px;
+  padding-top: 4px;
 }
 .hero-film-label .task-dot {
   margin-right: 5px;
@@ -1525,9 +1512,6 @@ dialog.goal-modal img {
   .hero-films {
     max-width: 1240px;
   }
-  .hero-film {
-    height: 248px;
-  }
   .hero {
     min-height: 720px;
   }
@@ -1535,9 +1519,6 @@ dialog.goal-modal img {
 @media (max-width: 1370px) {
   .metrics-band {
     margin: 0 32px;
-  }
-  .hero-film {
-    height: 198px;
   }
   .hero h1 {
     font-size: 124px;
@@ -1578,9 +1559,6 @@ dialog.goal-modal img {
   }
   .hero-films {
     gap: 12px;
-  }
-  .hero-film {
-    height: 184px;
   }
   .hero {
     min-height: 620px;
@@ -1747,18 +1725,8 @@ dialog.goal-modal img {
     padding: 0 20px;
     gap: 8px;
   }
-  .hero-film {
-    height: 162px;
-  }
-  .hero-film:nth-child(n) {
-    transform: none;
-  }
   .hero-film-label {
     font-size: 9px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 5px;
     justify-content: center;
   }
   .hero-film-label > span:last-child {
@@ -2207,9 +2175,6 @@ dialog.goal-modal img {
     width: 14px;
     height: 14px;
   }
-  .hero-film {
-    height: 113px;
-  }
   .hero-film-label {
     font-size: 8px;
   }
@@ -2225,9 +2190,6 @@ dialog.goal-modal img {
   }
   .hero-content {
     padding-top: 38px;
-  }
-  .hero-field {
-    bottom: 18px;
   }
   .hero-media-footer .lucide {
     width: 15px;
@@ -2347,7 +2309,7 @@ dialog.goal-modal img {
 .hero {
   height: auto;
   min-height: 0;
-  padding-bottom: 272px;
+  padding-bottom: 12px;
 }
 .hero-content {
   padding-top: 30px;
@@ -2391,9 +2353,6 @@ dialog.goal-modal img {
   margin-top: 19px;
   margin-bottom: 22px;
 }
-.hero-film {
-  height: 200px;
-}
 .citation {
   margin-top: 46px;
   padding-top: 24px;
@@ -2428,18 +2387,7 @@ dialog.goal-modal img {
 .citation code {
   font: inherit;
 }
-@media (min-width: 1600px) {
-  .hero {
-    padding-bottom: 295px;
-  }
-  .hero-film {
-    height: 226px;
-  }
-}
 @media (max-width: 1024px) {
-  .hero {
-    padding-bottom: 253px;
-  }
   .hero .people {
     gap: 8px 17px;
     font-size: 12px;
@@ -2449,14 +2397,10 @@ dialog.goal-modal img {
     max-width: 700px;
     font-size: 9px;
   }
-  .hero-film {
-    height: 181px;
-  }
 }
 @media (max-width: 760px) {
   .hero {
     height: auto;
-    padding-bottom: 227px;
   }
   .hero-content {
     padding-top: 28px;
@@ -2478,9 +2422,6 @@ dialog.goal-modal img {
     margin-top: 21px;
     margin-bottom: 15px;
   }
-  .hero-film {
-    height: 160px;
-  }
   .citation pre {
     font-size: 10px;
     padding: 17px;
@@ -2490,9 +2431,6 @@ dialog.goal-modal img {
   }
 }
 @media (max-width: 440px) {
-  .hero {
-    padding-bottom: 183px;
-  }
   .hero .people {
     gap: 8px 15px;
     margin-top: 17px;
@@ -2510,14 +2448,8 @@ dialog.goal-modal img {
   .hero h1 {
     margin-top: 17px;
   }
-  .hero-film {
-    height: 108px;
-  }
   .hero-links {
     margin-top: 20px;
-  }
-  .hero-field {
-    bottom: 12px;
   }
   .hero-media-footer {
     margin-top: 8px;

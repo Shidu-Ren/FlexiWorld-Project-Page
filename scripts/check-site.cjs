@@ -246,6 +246,20 @@ async function main() {
           .map((e) => e.textContent),
       );
     assert.deepEqual(overflow, [], `Text overflow at ${width}`);
+    const films = await page.locator(".hero-film").evaluateAll((els) =>
+      els.map((el) => {
+        const video = el.querySelector("video").getBoundingClientRect();
+        const label = el.querySelector(".hero-film-label").getBoundingClientRect();
+        return {
+          top: video.top,
+          height: video.height,
+          labelBelow: label.top >= video.bottom - 1,
+        };
+      }),
+    );
+    assert(films.every((f) => f.labelBelow), `Video label overlap at ${width}`);
+    assert(films.every((f) => Math.abs(f.top - films[0].top) < 1), `Video alignment at ${width}`);
+    assert(films.every((f) => Math.abs(f.height - films[0].height) < 1), `Video heights at ${width}`);
     if (width === 390) {
       await page
         .getByRole("button", { name: "Open navigation", exact: true })
