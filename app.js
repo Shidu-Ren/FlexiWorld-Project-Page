@@ -15,39 +15,10 @@
     loadToken = 0;
   let comparison = "baselines",
     resultIndex = 4,
-    heroPaused = motionPreference.matches,
     chunkPaused = motionPreference.matches;
   const currentTask = () => data.tasks[taskIndex];
   const currentCase = () => currentTask().cases[caseIndex];
   const videos = () => $$("#players video");
-
-  $("#hero-films").innerHTML = data.tasks
-    .map((task) => {
-      const c =
-        task.cases.find((c) => c.category === "direct") || task.cases[0];
-      const m = c.methods.find((m) => m.id === "direct");
-      return `<div class="hero-film"><video muted loop playsinline preload="metadata" poster="${asset(m.poster)}" aria-label="${task.name}, recorded FlexiWorld Direct rollout"><source src="${asset(m.video)}" type="video/mp4"></video><div class="hero-film-label"><span><b class="task-dot"></b>${task.name}</span><span>DIRECT / D=${c.distance}</span></div></div>`;
-    })
-    .join("");
-  function setHeroMotion() {
-    $$(".hero-film video").forEach((v) => {
-      v.muted = true;
-      if (heroPaused || document.hidden) v.pause();
-      else v.play().catch(() => {});
-    });
-    const label = heroPaused
-      ? "Play background videos"
-      : "Pause background videos";
-    $("#hero-motion").setAttribute("aria-label", label);
-    $("#hero-motion").title = label;
-    $("#hero-motion").innerHTML = icon(heroPaused ? "play" : "pause");
-    icons();
-  }
-  $("#hero-motion").addEventListener("click", () => {
-    heroPaused = !heroPaused;
-    setHeroMotion();
-  });
-  setHeroMotion();
 
   $("#task-tabs").innerHTML = data.tasks
     .map(
@@ -472,88 +443,18 @@
     (entries) =>
       entries.forEach((e) => {
         if (e.target.id === "rollouts" && !e.isIntersecting) stopPlayback();
-        if (e.target.id === "top") {
-          heroVisible = e.isIntersecting;
-          if (heroVisible) setHeroMotion();
-          else $$(".hero-film video").forEach((v) => v.pause());
-        }
       }),
     { threshold: 0 },
   );
-  let heroVisible = true;
   visible.observe($("#rollouts"));
-  visible.observe($("#top"));
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopPlayback();
-      $$(".hero-film video").forEach((v) => v.pause());
-    } else if (heroVisible) setHeroMotion();
+    if (document.hidden) stopPlayback();
   });
   motionPreference.addEventListener("change", () => {
-    heroPaused = motionPreference.matches;
     chunkPaused = motionPreference.matches;
-    setHeroMotion();
     setChunkMotion();
     if (motionPreference.matches) document.body.classList.remove("js-motion");
   });
 
-  // Decorative action-partition traces. They encode no measured research data.
-  const canvas = $("#hero-canvas"),
-    ctx = canvas.getContext("2d");
-  let width = 0,
-    height = 0;
-  let pointer = 0;
-  function resizeCanvas() {
-    const r = $("#top").getBoundingClientRect();
-    width = r.width;
-    height = r.height;
-    const ratio = Math.min(devicePixelRatio, 2);
-    canvas.width = width * ratio;
-    canvas.height = height * ratio;
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-  }
-  new ResizeObserver(resizeCanvas).observe($("#top"));
-  $("#top").addEventListener(
-    "pointermove",
-    (e) => {
-      pointer = (e.clientX / width - 0.5) * 22;
-    },
-    { passive: true },
-  );
-  function ambient(now) {
-    if (heroVisible && !document.hidden) {
-      ctx.clearRect(0, 0, width, height);
-      const t = motionPreference.matches || heroPaused ? 0 : now * 0.012;
-      const margin = width < 760 ? 12 : 36;
-      for (let row = 0; row < 8; row++) {
-        const y = 36 + row * 56,
-          side = row % 2 === 0 ? 1 : -1;
-        ctx.strokeStyle = "rgba(178,205,137,0.075)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(margin, y);
-        ctx.lineTo(width - margin, y);
-        ctx.stroke();
-        for (let col = 0; col < 5; col++) {
-          const x =
-            ((col * 253 + t * side + row * 79 + width * 10 + pointer) %
-              (width + 120)) -
-            60;
-          const distance = Math.abs(x - width / 2) / (width / 2);
-          ctx.fillStyle = `rgba(${row % 3 === 0 ? "112,190,208" : "196,243,107"},${0.055 + 0.09 * distance})`;
-          const chunkWidth = [17, 34, 53, 25, 40][(row + col) % 5];
-          ctx.fillRect(x, y - 3, chunkWidth, 6);
-          ctx.strokeStyle = "rgba(177,206,139,0.16)";
-          ctx.beginPath();
-          ctx.moveTo(x, y - 9);
-          ctx.lineTo(x, y + 9);
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(ambient);
-  }
-  resizeCanvas();
-  requestAnimationFrame(ambient);
   icons();
 })();

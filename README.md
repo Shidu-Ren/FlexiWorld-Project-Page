@@ -19,8 +19,9 @@ are required. All links also work under a GitHub Pages repository subpath.
   seek, speed controls, goal enlargement, and ten verified cases.
 - Interactive benchmark and planner results; exact means and SDs are taken
   from the manuscript tables, not inferred from selected recordings.
-- A conceptual, animated action-partition field and chunk-boundary schematic.
-  These are explanatory visuals, not scientific measurements.
+- A compact, static paper header with authors and resource links. Benchmark
+  recordings live in the Rollouts section and play only on request.
+- A conceptual chunk-boundary schematic, not a scientific measurement.
 - Downloadable manuscript and structured results; paired videos play on the page.
 - Keyboard navigation, mobile layouts, reduced-motion support, locally hosted fonts.
 
@@ -68,6 +69,7 @@ The implementation is original. The content-first media structure takes cues
 from [Nerfies](https://nerfies.github.io/), the task-wise demonstrations from
 [Diffusion Policy](https://diffusion-policy.cs.columbia.edu/), and the visual
 research narrative from [V-JEPA](https://ai.meta.com/research/vjepa/).
+The paper-first header takes cues from [ODEWorld](https://dstate.github.io/odeworld_website/).
 No third-party research videos or illustrations are reproduced.
 
 Lucide icons: ISC license in `assets/LUCIDE-LICENSE`.

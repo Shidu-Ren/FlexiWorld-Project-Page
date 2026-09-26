@@ -2284,15 +2284,6 @@ dialog.goal-modal img {
   }
 }
 
-/* The moving partition field is conceptual; the four films remain unmodified. */
-#hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
 .author-notes {
   display: flex;
   flex-wrap: wrap;
@@ -2453,5 +2444,93 @@ dialog.goal-modal img {
   }
   .hero-media-footer {
     margin-top: 8px;
+  }
+}
+
+/* A content-led masthead keeps recordings in the comparison section. */
+.paper-header {
+  background: var(--paper);
+  padding: 58px 32px 46px;
+}
+.paper-header-content {
+  max-width: 1120px;
+  margin: auto;
+  text-align: center;
+}
+.paper-header h1 {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+.paper-name {
+  color: var(--green);
+  white-space: nowrap;
+}
+.paper-header .people {
+  max-width: 1020px;
+  margin: 28px auto 0;
+  gap: 8px 22px;
+  font-size: 16px;
+}
+.paper-header .person a:hover {
+  color: var(--green);
+}
+.paper-header .person sup {
+  color: var(--muted);
+  font-size: 11px;
+}
+.paper-header .affiliations {
+  max-width: 960px;
+  margin-top: 16px;
+  gap: 5px 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.paper-header .affiliations sup {
+  font-size: 10px;
+}
+.paper-header .author-notes {
+  color: var(--muted);
+  margin-top: 12px;
+  font-size: 12px;
+}
+.paper-header .hero-links {
+  margin: 26px 0 0;
+  gap: 10px;
+}
+.paper-header .button-dark {
+  background: var(--paper);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.paper-header .button-dark:hover {
+  background: var(--wash);
+  border-color: #adb8a8;
+}
+@media (max-width: 760px) {
+  .paper-header {
+    padding: 36px 20px 32px;
+  }
+  .paper-header h1 {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+  .paper-header .people {
+    margin-top: 22px;
+    font-size: 14px;
+    gap: 7px 16px;
+  }
+  .paper-header .affiliations {
+    font-size: 12px;
+    gap: 4px 14px;
+  }
+  .paper-header .author-notes {
+    font-size: 11px;
+    gap: 3px 12px;
+  }
+  .paper-header .hero-links {
+    margin-top: 22px;
+    gap: 8px;
   }
 }

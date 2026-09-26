@@ -31,7 +31,7 @@ async function main() {
   );
   await page.evaluate(() => document.fonts.ready);
   await page.waitForFunction(
-    () => document.querySelectorAll(".hero-film video").length === 4,
+    () => document.querySelectorAll("#task-tabs button").length === 4,
   );
   await page.waitForTimeout(700);
   assert.equal(await page.locator(".people .person").count(), 7);
@@ -45,7 +45,7 @@ async function main() {
     "\u2021 Corresponding Author",
   );
   assert.equal(await page.locator('.people a[href$="~Shidu_Ren1"] sup').textContent(), "1,*,\u2020");
-  assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "5,\u2021");
+  assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "2,\u2021");
   assert.equal(
     await page.locator(".equal-contribution").textContent(),
     "* Equal Contribution",
@@ -84,21 +84,9 @@ async function main() {
     } else if (!/^https?:|^data:/.test(url))
       assert(fs.existsSync(path.join(root, url)), `Missing file ${url}`);
   }
-  const first = await page.locator("#hero-canvas").screenshot();
-  await page.waitForTimeout(350);
-  const second = await page.locator("#hero-canvas").screenshot();
-  assert(!first.equals(second), "Ambient canvas is not moving");
-  await page
-    .getByRole("button", { name: "Pause background videos", exact: true })
-    .click();
-  assert(
-    await page
-      .locator(".hero-film video")
-      .evaluateAll((vs) => vs.every((v) => v.paused)),
-  );
-  await page
-    .getByRole("button", { name: "Play background videos", exact: true })
-    .click();
+  assert.equal(await page.locator("#top video, #top canvas").count(), 0);
+  assert(await page.locator("#players video").evaluateAll((vs) =>
+    vs.every((v) => v.paused)), "Recordings must not autoplay");
 
   for (const task of data.tasks) {
     await page.getByRole("tab", { name: new RegExp(task.name) }).click();
@@ -246,20 +234,9 @@ async function main() {
           .map((e) => e.textContent),
       );
     assert.deepEqual(overflow, [], `Text overflow at ${width}`);
-    const films = await page.locator(".hero-film").evaluateAll((els) =>
-      els.map((el) => {
-        const video = el.querySelector("video").getBoundingClientRect();
-        const label = el.querySelector(".hero-film-label").getBoundingClientRect();
-        return {
-          top: video.top,
-          height: video.height,
-          labelBelow: label.top >= video.bottom - 1,
-        };
-      }),
-    );
-    assert(films.every((f) => f.labelBelow), `Video label overlap at ${width}`);
-    assert(films.every((f) => Math.abs(f.top - films[0].top) < 1), `Video alignment at ${width}`);
-    assert(films.every((f) => Math.abs(f.height - films[0].height) < 1), `Video heights at ${width}`);
+    const header = await page.locator("#top").boundingBox();
+    assert(header.y + header.height < (width >= 1024 ? 1000 : 844),
+      `Paper header hides the next section at ${width}`);
     if (width === 390) {
       await page
         .getByRole("button", { name: "Open navigation", exact: true })
@@ -300,7 +277,7 @@ async function main() {
   await reduced.waitForTimeout(300);
   assert(
     await reduced
-      .locator(".hero-film video")
+      .locator("#players video")
       .evaluateAll((vs) => vs.every((v) => v.paused)),
   );
   assert.equal(
