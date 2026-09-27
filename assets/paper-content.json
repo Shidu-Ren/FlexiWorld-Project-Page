@@ -1,5 +1,5 @@
 {
-  "manuscriptCommit": "2d0ff24a9d37371218e1ac0d79c8d65cc6d065b3",
+  "manuscriptCommit": "55adfa53b9861e078b7dbce5e481fda1773d593a",
   "files": {
     "teaser.png": {
       "source": "figures/flexiworld-teaser.pdf",
@@ -34,7 +34,7 @@
   },
   "abstract": "Latent world models predict future states for goal-directed planning using action chunks spanning multiple primitive steps. Existing methods typically use fixed-length chunks and either omit goal-conditioned action generation or limit their supervision to short goal spans. We introduce FlexiWorld, a JEPA-based world model that combines mixed-span goal supervision with variable-length action chunks to improve long-horizon control. During training, we sample varying goal spans and randomly partition the actions into variable-length chunks. We jointly train the world model with a causal action encoder that embeds variable-length chunks and an autoregressive actor that generates primitive actions sequentially. Student Forcing reduces exposure bias by training on generated action prefixes. For planning, Actor-Residual Cross-Entropy Method (ARCEM) combines action-residual search with within-chunk autoregressive feedback and chunk-boundary latent prediction. Across four benchmarks and goal distances, FlexiWorld with ARCEM achieves 89.29% mean success, compared with 83.98% for the strongest baseline. PushT ablations show improved direct control from mixed-span supervision, variable-length chunks, and Student Forcing. Without retraining, FlexiWorld supports different planning chunk lengths: longer chunks accelerate ARCEM by approximately 1.3\u00d7 on average while maintaining comparable average success.",
   "textSources": {
-    "iclr2027_conference.tex": "b143d60a01cb9e0d2f2b9f826063ab9acce0ac581eaf6369d2e038a015775b70",
+    "iclr2027_conference.tex": "7343f8bdd075756c1ed76a3a981e5ebfea46677f338f6ed14d7a4ce0beeded53",
     "appendix/experimental_details.tex": "3b687fdf53bfa8e9fbd20339081509d60ea4fb2fd919cb0cab964d0bbb9b81f6",
     "appendix/failure_modes.tex": "603a57cde958f77c5dbb56b2fad2413c49d7731ca5433e3389444a7d60fe5ded",
     "sections/experiments.tex": "27e005f715a173a9117ba258d6d073cf7b7a98ab1f78eeb4ac3d333f38070a1b"

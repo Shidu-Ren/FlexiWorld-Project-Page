@@ -44,12 +44,12 @@ async function main() {
   );
   assert.equal(
     await page.locator(".author-notes .corresponding-author").textContent(),
-    "\u2021 Corresponding Author",
+    "\u2020 Corresponding Author",
   );
   assert.equal(await page.locator('.people a[href$="~Shidu_Ren1"] sup').textContent(), "1*");
   assert.equal(await page.locator('.people a[href$="~Qilin_Gu2"] sup').textContent(), "1*");
   assert.equal(await page.locator('.people a[href$="~Zhenghao_Ni1"] sup').textContent(), "1*");
-  assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "2\u2021");
+  assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "2\u2020");
   assert.equal(await page.locator('.people a[href$="~Damien_Scieur3"] sup').textContent(), "3,6");
   assert.equal(
     await page.locator(".equal-contribution").textContent(),
