@@ -37,6 +37,9 @@ async function main() {
   );
   await page.waitForTimeout(700);
   assert.equal(await page.locator(".people .person").count(), 7);
+  assert.equal(await page.locator('link[rel="canonical"]').getAttribute("href"), "https://shidu-ren.github.io/FlexiWorld-Project-Page/");
+  assert.equal(await page.locator('a[href="https://github.com/Shidu-Ren/FlexiWorld"]').count(), 1);
+  assert((await page.locator(".affiliations").textContent()).includes("Tencent Jarvis Lab"));
   assert.equal(await page.locator(".people .lead-label").count(), 0);
   assert.equal(
     await page.locator(".project-lead, .footer-lead").count(),

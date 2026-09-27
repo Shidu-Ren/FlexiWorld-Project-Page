@@ -9,7 +9,7 @@ The first three authors contributed equally.
 
 ## Website
 
-Live page: https://shidu-ren.github.io/flexiworld/
+Live page: https://shidu-ren.github.io/FlexiWorld-Project-Page/
 
 A self-contained static site for GitHub Pages. Open `index.html` directly in a
 browser; no build step, web server, analytics, or third-party runtime requests
