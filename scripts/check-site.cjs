@@ -39,14 +39,14 @@ async function main() {
   assert.equal(await page.locator(".people .person").count(), 7);
   assert.equal(await page.locator(".people .lead-label").count(), 0);
   assert.equal(
-    await page.locator(".author-notes .project-lead").textContent(),
-    "\u2020 Project Lead",
+    await page.locator(".project-lead, .footer-lead").count(),
+    0,
   );
   assert.equal(
     await page.locator(".author-notes .corresponding-author").textContent(),
     "\u2021 Corresponding Author",
   );
-  assert.equal(await page.locator('.people a[href$="~Shidu_Ren1"] sup').textContent(), "1,*,\u2020");
+  assert.equal(await page.locator('.people a[href$="~Shidu_Ren1"] sup').textContent(), "1,*");
   assert.equal(await page.locator('.people a[href$="~Yunze_Liu2"] sup').textContent(), "2,\u2021");
   assert.equal(
     await page.locator(".equal-contribution").textContent(),

@@ -3,9 +3,9 @@
 Research project page for **FlexiWorld: Learning and Planning via Flexible Action
 Chunks Across Multiple Time Scales**.
 
-Shidu Ren (Project Lead), Qilin Gu, Zhenghao Ni, Junhan Sun, Jiaqi Wang,
+Shidu Ren, Qilin Gu, Zhenghao Ni, Junhan Sun, Jiaqi Wang,
 Damien Scieur, Yunze Liu.
-The first three authors contributed equally. Shidu Ren is also Project Lead.
+The first three authors contributed equally.
 
 ## Website
 
