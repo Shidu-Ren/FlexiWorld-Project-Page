@@ -91,7 +91,7 @@ async function main() {
     if (url.startsWith("#")) {
       if (url.length > 1)
         assert(await page.locator(url).count(), `Missing anchor ${url}`);
-    } else if (!/^https?:|^data:/.test(url))
+    } else if (!/^https?:|^data:|^mailto:/.test(url))
       assert(fs.existsSync(new URL(url, pathToFileURL(path.join(root, 'index.html')))), `Missing file ${url}`);
   }
   assert.equal(await page.locator("#top video").count(), 0);

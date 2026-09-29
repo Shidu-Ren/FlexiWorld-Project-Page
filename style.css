@@ -1437,6 +1437,33 @@ footer > p {
   color: #98a18f;
   margin-top: 20px;
 }
+.footer-contact {
+  flex-basis: 100%;
+  min-width: 0;
+  border-top: 1px solid #3d4437;
+  padding-top: 24px;
+}
+.footer-contact h2 {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+.footer-contact ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.footer-contact a {
+  color: var(--lime);
+  overflow-wrap: anywhere;
+}
+.footer-contact a:hover {
+  text-decoration: underline;
+}
 .footer-lead {
   color: var(--lime);
   margin-left: 6px;
