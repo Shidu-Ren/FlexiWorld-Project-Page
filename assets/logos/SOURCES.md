@@ -3,6 +3,7 @@
 These marks identify author affiliations and remain the property of their
 respective owners. Tencent and Samsung are parent-organization marks, not
 separate lab logos. Assets are shared with the FlexiWorld code repository.
+The Zhejiang SVG viewport displays only the seal from the original lockup.
 
 | Mark | Source |
 |:--|:--|
