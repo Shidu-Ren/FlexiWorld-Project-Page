@@ -2515,31 +2515,6 @@ dialog.goal-modal img {
   height: 64px;
   object-fit: contain;
 }
-.institution-named {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 64px;
-  font-family: "Songti SC", "Noto Serif CJK SC", serif;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1.15;
-}
-.institution-named span {
-  white-space: nowrap;
-}
-.institution-tsinghua {
-  color: #82318e;
-}
-.institution-zhejiang {
-  color: #003f88;
-}
-.institution-named img {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-}
 @media (min-width: 701px) and (max-width: 1050px) {
   .institution-logos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2553,17 +2528,6 @@ dialog.goal-modal img {
   }
   .institution-logos img {
     height: 64px;
-  }
-  .institution-named {
-    flex-direction: column;
-    gap: 4px;
-    font-size: 16px;
-    text-align: center;
-  }
-  .institution-named img {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
   }
 }
 .paper-header-content {

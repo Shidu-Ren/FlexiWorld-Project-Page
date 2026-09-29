@@ -37,9 +37,9 @@ async function main() {
   );
   await page.waitForTimeout(700);
   assert.equal(await page.locator(".people .person").count(), 7);
-  assert.equal(await page.locator(".institution-logos img").count(), 6);
-  assert.equal(await page.locator(".institution-tsinghua span").textContent(), "清华大学");
-  assert.equal(await page.locator(".institution-zhejiang span").textContent(), "浙江大学");
+  assert.equal(await page.locator(".institution-logos > *").count(), 6);
+  assert.equal(await page.locator(".institution-tsinghua").getAttribute("alt"), "清华大学");
+  assert.equal(await page.locator('.institution-logos img[alt="浙江大学"]').count(), 1);
   assert.equal(await page.locator(".institution-logos").evaluate(
     (element) => getComputedStyle(element).display,
   ), "grid", "Institution layout stylesheet must be applied");
