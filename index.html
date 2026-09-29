@@ -188,20 +188,20 @@
       <section class="section overview" id="overview">
         <div class="section-top">
           <span class="eyebrow">01 / THE IDEA</span
-          ><span class="section-tag">Think beyond a fixed step</span>
+          ><span class="section-tag">Think beyond a fixed chunk length</span>
         </div>
         <div class="overview-heading reveal">
           <h2>A world model.<br />More than one tempo.</h2>
           <div class="overview-copy">
             <p>
-              Goals can be far away. Actions do not have to come in one fixed
-              length.
+              Goals can be far away. Action chunks need not have a fixed length.
             </p>
             <p>
-              FlexiWorld learns latent dynamics and goal-conditioned action
-              generation together, using variable-length action chunks and
-              multiple goal spans. The same trained model can plan at different
-              temporal resolutions.
+              FlexiWorld jointly learns latent dynamics and goal-conditioned
+              action generation through mixed-span goal supervision and
+              variable-length action chunks. Built on JEPA, it predicts future
+              states in a learned latent space. The same trained model supports
+              different planning chunk lengths without retraining.
             </p>
           </div>
         </div>
