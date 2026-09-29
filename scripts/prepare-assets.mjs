@@ -68,7 +68,6 @@ const tasks = manifest.tasks.map((task) => ({
 for (const [file, name] of [
   ["figures/odyssey-training.png", "training.png"],
   ["figures/odyssey-arcem.png", "arcem.png"],
-  ["output/appendix-spacing/iclr2027_conference.pdf", "flexiworld-paper.pdf"],
   ["supplementary/gallery-template/lucide.min.js", "lucide.min.js"],
   ["supplementary/gallery-template/LUCIDE-LICENSE", "LUCIDE-LICENSE"],
 ])
