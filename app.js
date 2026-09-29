@@ -9,7 +9,6 @@
   const asset = (name) => `assets/${name}`;
   const taskNames = ["PushT", "Cube", "Reacher", "TwoRoom"];
   let taskIndex = 0,
-    caseIndex = 0,
     playback = false,
     frameRequest = 0,
     loadToken = 0;
@@ -17,7 +16,7 @@
     resultIndex = 4,
     chunkPaused = motionPreference.matches;
   const currentTask = () => data.tasks[taskIndex];
-  const currentCase = () => currentTask().cases[caseIndex];
+  const currentCase = () => currentTask().cases[0];
   const videos = () => $$("#players video");
 
   $("#task-tabs").innerHTML = data.tasks
@@ -28,7 +27,6 @@
     .join("");
   function selectTask(index) {
     taskIndex = index;
-    caseIndex = 0;
     $$("#task-tabs button").forEach((b, i) => {
       b.setAttribute("aria-selected", String(i === index));
       b.tabIndex = i === index ? 0 : -1;
@@ -81,7 +79,7 @@
     ++loadToken;
     const c = currentCase();
     $("#case-meta").textContent =
-      `${currentTask().name.toUpperCase()} / D = ${c.distance} / k = 5 / CASE ${String(caseIndex + 1).padStart(2, "0")}`;
+      `${currentTask().name.toUpperCase()} / D = ${c.distance} / k = 5`;
     $("#case-title").textContent =
       c.category === "direct"
         ? "A goal reached without search."
@@ -93,8 +91,6 @@
       c.methods.map((m) => playerMarkup(m)).join("");
     $("#timeline").max = 2 * c.distance;
     $("#timeline").value = 0;
-    $("#case-count").textContent =
-      `${String(caseIndex + 1).padStart(2, "0")} / ${String(currentTask().cases.length).padStart(2, "0")}`;
     $("#media-error").hidden = true;
     videos().forEach((v) => {
       v.muted = true;
@@ -210,15 +206,6 @@
     });
     $("#timeline").value = 0;
     updateTimeline();
-  });
-  $("#next-case").addEventListener("click", () => {
-    caseIndex = (caseIndex + 1) % currentTask().cases.length;
-    renderCase();
-  });
-  $("#previous-case").addEventListener("click", () => {
-    caseIndex =
-      (caseIndex + currentTask().cases.length - 1) % currentTask().cases.length;
-    renderCase();
   });
   $("#retry-media").addEventListener("click", renderCase);
   renderCase();

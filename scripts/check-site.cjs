@@ -115,13 +115,10 @@ async function main() {
   assert(await page.locator("#players video").evaluateAll((vs) =>
     vs.every((v) => v.paused)), "Recordings must not autoplay");
 
+  assert.equal(await page.locator('#next-case, #previous-case, #case-count').count(), 0);
   for (const task of data.tasks) {
     await page.getByRole("tab", { name: new RegExp(task.name) }).click();
-    for (const [caseIndex, c] of task.cases.entries()) {
-      if (caseIndex)
-        await page
-          .getByRole("button", { name: "Next case", exact: true })
-          .click();
+    for (const c of task.cases.slice(0, 1)) {
       await page.waitForFunction(() =>
         [...document.querySelectorAll("#players video")].every(
           (v) => v.readyState >= 2,
