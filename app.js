@@ -13,8 +13,7 @@
     frameRequest = 0,
     loadToken = 0;
   let comparison = "baselines",
-    resultIndex = 4,
-    chunkPaused = motionPreference.matches;
+    resultIndex = 4;
   const currentTask = () => data.tasks[taskIndex];
   const currentCase = () => currentTask().cases[0];
   const videos = () => $$("#players video");
@@ -244,43 +243,6 @@
     }
   });
 
-  function renderChunks(k) {
-    $("#action-ribbon").innerHTML = Array.from(
-      { length: 25 },
-      (_, i) =>
-        `<span class="action-cell ${(i + 1) % k === 0 || i === 24 ? "boundary" : ""}" style="--i:${i}" data-end="${i + 1}" aria-hidden="true"></span>`,
-    ).join("");
-    $("#action-ribbon").setAttribute(
-      "aria-label",
-      `25 primitive actions in ${Math.ceil(25 / k)} chunks: ${k === 5 ? "5, 5, 5, 5, 5" : "10, 10, 5"}. One latent prediction after each chunk.`,
-    );
-    $("#predictor-count").textContent = Math.ceil(25 / k);
-    $$("[data-chunk]").forEach((b) => {
-      const active = Number(b.dataset.chunk) === k;
-      b.classList.toggle("active", active);
-      b.setAttribute("aria-pressed", String(active));
-    });
-  }
-  function setChunkMotion() {
-    $("#action-ribbon").classList.toggle("paused", chunkPaused);
-    $("#chunk-play").innerHTML = icon(chunkPaused ? "play" : "pause");
-    const label = chunkPaused
-      ? "Play chunk animation"
-      : "Pause chunk animation";
-    $("#chunk-play").title = label;
-    $("#chunk-play").setAttribute("aria-label", label);
-    icons();
-  }
-  $$("[data-chunk]").forEach((b) =>
-    b.addEventListener("click", () => renderChunks(Number(b.dataset.chunk))),
-  );
-  $("#chunk-play").addEventListener("click", () => {
-    chunkPaused = !chunkPaused;
-    setChunkMotion();
-  });
-  renderChunks(5);
-  setChunkMotion();
-
   function renderResults() {
     const rows = comparison === "baselines" ? data.results : data.planners;
     $("#results-chart").innerHTML = rows
@@ -452,8 +414,6 @@
     else if (!motionPreference.matches) visibleMechanisms.forEach(video => video.play().catch(() => {}));
   });
   motionPreference.addEventListener("change", () => {
-    chunkPaused = motionPreference.matches;
-    setChunkMotion();
     if (motionPreference.matches) document.body.classList.remove("js-motion");
     if (motionPreference.matches) mechanismVideos.forEach(video => video.pause());
   });

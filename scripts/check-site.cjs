@@ -92,7 +92,7 @@ async function main() {
       if (url.length > 1)
         assert(await page.locator(url).count(), `Missing anchor ${url}`);
     } else if (!/^https?:|^data:/.test(url))
-      assert(fs.existsSync(path.join(root, url)), `Missing file ${url}`);
+      assert(fs.existsSync(new URL(url, pathToFileURL(path.join(root, 'index.html')))), `Missing file ${url}`);
   }
   assert.equal(await page.locator("#top video").count(), 0);
   assert.equal(await page.locator("#top canvas").count(), 1);
@@ -221,11 +221,7 @@ async function main() {
     assert.equal(await page.locator("#dialog-image").getAttribute("src"), await figure.getAttribute("data-image"));
     await page.keyboard.press("Escape");
   }
-  await page.locator('[data-chunk="10"]').click();
-  assert.equal(await page.locator("#predictor-count").textContent(), "3");
-  assert.equal(await page.locator(".action-cell.boundary").count(), 3);
-  await page.locator('[data-chunk="5"]').click();
-  assert.equal(await page.locator("#predictor-count").textContent(), "5");
+  assert.equal(await page.locator('.chunk-explorer, #action-ribbon').count(), 0);
   await page.locator('[data-comparison="planners"]').click();
   assert.equal(await page.locator(".bar-row").count(), 3);
   await page.locator("#result-task").selectOption("0");
@@ -316,12 +312,6 @@ async function main() {
     await reduced
       .locator("#players video")
       .evaluateAll((vs) => vs.every((v) => v.paused)),
-  );
-  assert.equal(
-    await reduced
-      .locator("#action-ribbon")
-      .evaluate((e) => e.classList.contains("paused")),
-    true,
   );
   assert.equal(await reduced.getByRole("button", { name: "Play background animation", exact: true }).count(), 1);
   await reduced.close();

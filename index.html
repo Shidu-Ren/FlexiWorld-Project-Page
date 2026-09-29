@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="style.css?v=media-75" />
     <script defer src="assets/lucide.min.js"></script>
     <script defer src="assets/research-data.js"></script>
-    <script defer src="app.js"></script>
+    <script defer src="app.js?v=no-chunk-explorer"></script>
   </head>
   <body>
     <a class="skip-link" href="#overview">Skip to research</a>
@@ -432,62 +432,6 @@
             action encoder, latent predictor, and goal-conditioned actor.
           </figcaption>
         </figure>
-
-        <div class="chunk-explorer reveal">
-          <div class="chunk-intro">
-            <span class="eyebrow">PLANNING GRANULARITY</span>
-            <h3>Same horizon.<br />Fewer prediction steps.</h3>
-            <p>
-              For a 25-action plan, ten-action chunks use a final five-action
-              chunk. This changes imagined transitions, not the schedule for
-              real observations.
-            </p>
-            <div
-              class="segmented"
-              role="group"
-              aria-label="Planning chunk length"
-            >
-              <button class="active" data-chunk="5" aria-pressed="true">
-                k = 5</button
-              ><button data-chunk="10" aria-pressed="false">k = 10</button>
-            </div>
-          </div>
-          <div class="chunk-visual">
-            <div class="chunk-visual-heading">
-              <span>25 PRIMITIVE ACTIONS</span>
-              <div>
-                <button
-                  class="icon-button"
-                  id="chunk-play"
-                  aria-label="Pause chunk animation"
-                  title="Pause chunk animation"
-                >
-                  <i data-lucide="pause"></i>
-                </button>
-              </div>
-            </div>
-            <div
-              class="action-ribbon"
-              id="action-ribbon"
-              aria-label="Action chunks and latent prediction boundaries"
-            ></div>
-            <div class="chunk-axis">
-              <span>INITIAL STATE</span><span>GOAL HORIZON</span>
-            </div>
-            <div class="chunk-readout">
-              <div>
-                <strong id="predictor-count">5</strong
-                ><span>latent predictions</span>
-              </div>
-              <div><strong>25</strong><span>primitive actions</span></div>
-              <div><strong>0</strong><span>additional training</span></div>
-            </div>
-            <p class="small-note">
-              Schematic of chunk boundaries, not a simulated rollout or latency
-              measurement.
-            </p>
-          </div>
-        </div>
 
         <div class="arcem-story reveal">
           <span class="eyebrow">ACTOR-RESIDUAL CROSS-ENTROPY METHOD</span>
