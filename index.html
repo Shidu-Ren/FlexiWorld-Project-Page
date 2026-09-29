@@ -591,8 +591,7 @@
         <div class="heading-row reveal">
           <h2>Where do the<br />gains come from?</h2>
           <p>
-            Matched comparisons separate action prediction, information in frozen
-            features, and the effects of search and reobservation.
+            A closer look at action prediction, learned features, and search.
           </p>
         </div>
 
@@ -600,10 +599,9 @@
           <div class="diagnostic-heading reveal">
             <span class="eyebrow">01 / ACTION PREDICTION</span>
             <h3 id="action-study-title">Better action predictions at longer goal distances.</h3>
-            <p>On PushT, both actors predict the next five actions from matched
-              observations, goals, and preceding expert actions. FlexiWorld improves
-              all four mean metrics at D = 50, 75, and 100. INTACT is better at
-              D = 25, where FlexiWorld nevertheless maintains comparable Direct success.</p>
+            <p>On PushT, FlexiWorld improves all four mean action-prediction metrics
+              at D = 50, 75, and 100. INTACT predicts better at D = 25, while
+              Direct success remains comparable.</p>
           </div>
           <figure class="paper-figure reveal">
             <button class="image-zoom" data-image="assets/action-diagnostics.png"
@@ -614,9 +612,7 @@
               <span class="zoom-icon"><i data-lucide="expand"></i></span>
             </button>
             <figcaption><span>APPENDIX D.1</span>
-              Means and sample SD across three training seeds; hollow points show
-              individual checkpoints. This tests actor predictions from encoded
-              observations, not a latent rollout or execution success.
+              Action-prediction quality across goal distances; hollow points show individual checkpoints.
             </figcaption>
           </figure>
         </article>
@@ -625,10 +621,9 @@
           <div class="diagnostic-heading reveal">
             <span class="eyebrow">02 / FROZEN FEATURES</span>
             <h3 id="probe-study-title">Useful temporal and action information, without the actor.</h3>
-            <p>Independent ridge probes use frozen current and goal features.
-              Temporal-gap R<sup>2</sup> rises from 0.565 ± 0.026 for INTACT to
-              0.603 ± 0.029 for FlexiWorld. Action-probe R<sup>2</sup> is equal
-              or higher at each tested distance.</p>
+            <p>Frozen-feature probes predict demonstrated time gaps better with
+              FlexiWorld. Action-probe R<sup>2</sup> matches or exceeds INTACT
+              at every tested distance.</p>
           </div>
           <figure class="paper-figure reveal">
             <button class="image-zoom" data-image="assets/frozen-probes.png"
@@ -639,27 +634,19 @@
               <span class="zoom-icon"><i data-lucide="expand"></i></span>
             </button>
             <figcaption><span>APPENDIX D.2</span>
-              Means and sample SD across three training seeds. Probes use an
-              episode-disjoint 80/20 fitting/evaluation split and do not update
-              the world model. Temporal gaps are demonstrated time gaps, not minimum
-              time to a goal.
+              Temporal-gap and action probes on frozen representations.
             </figcaption>
           </figure>
-          <p class="diagnostic-context"><strong>Actor-free control remains similar.</strong>
-            With both actors disabled and the same CEM planner, PushT success is
-            40.75% for FlexiWorld and 40.17% for INTACT (training seed 0, one replan).
-            The probe gains do not imply a comparable advantage in actor-free control.</p>
+          <p class="diagnostic-context">These probe gains do not translate into a
+            clear actor-free control advantage: both models perform similarly with CEM alone.</p>
         </article>
 
         <article class="diagnostic-study" aria-labelledby="recovery-study-title">
           <div class="diagnostic-heading reveal">
             <span class="eyebrow">03 / SEARCH AND REOBSERVATION</span>
             <h3 id="recovery-study-title">Search helps, but can also lose a successful plan.</h3>
-            <p>Paired Direct and ARCEM evaluations share weights, starts, goals, and
-              execution budgets. On PushT, ARCEM succeeds in 183 cases where Direct
-              fails, but fails in 69 where Direct succeeds: a net gain of 114 out
-              of 1,200 evaluations. Cube has less room for improvement, with
-              43 gains and 34 losses.</p>
+            <p>On PushT, ARCEM gains 183 successes and loses 69 relative to Direct,
+              for a net gain of 114 in 1,200 paired evaluations. Gains on Cube are smaller.</p>
           </div>
           <figure class="paper-figure reveal">
             <button class="image-zoom" data-image="assets/paired-recovery.png"
@@ -670,16 +657,11 @@
               <span class="zoom-icon"><i data-lucide="expand"></i></span>
             </button>
             <figcaption><span>APPENDIX E.1</span>
-              Training seed 0; 300 paired evaluations per distance and task.
-              Solid bars show first-stage success; hatched extensions show recovery
-              after reobservation. Lower panels count ARCEM-only and Direct-only
-              successes after both stages. ARCEM uses T = 0.2.
+              First-plan success, recovery after reobservation, and paired search gains and losses.
             </figcaption>
           </figure>
-          <p class="diagnostic-context"><strong>Candidate ranking is still a limitation.</strong>
-            Keeping the Direct plan among the candidates does not guarantee its
-            selection: ARCEM ranks plans by predicted latent costs, not observed
-            execution outcomes.</p>
+          <p class="diagnostic-context">Predicted latent costs can misrank candidates,
+            so search does not improve every plan.</p>
         </article>
       </section>
 
@@ -737,9 +719,7 @@
         <div class="research-note">
           <i data-lucide="scan-eye"></i>
           <p>
-            Evaluated in offline-trained simulation settings. The recorded cases
-            illustrate execution behavior; they do not establish real-world
-            deployment safety.
+            Evaluated in simulation; real-world deployment remains untested.
           </p>
         </div>
       </section>
