@@ -38,6 +38,9 @@ async function main() {
   await page.waitForTimeout(700);
   assert.equal(await page.locator(".people .person").count(), 7);
   assert.equal(await page.locator(".institution-logos img").count(), 6);
+  assert.equal(await page.locator(".institution-logos").evaluate(
+    (element) => getComputedStyle(element).display,
+  ), "grid", "Institution layout stylesheet must be applied");
   assert(await page.locator(".institution-logos img").evaluateAll(
     (images) => images.every((image) => image.complete && image.naturalWidth > 0),
   ), "Institution logos must load");
