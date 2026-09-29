@@ -225,16 +225,18 @@
             ><i data-lucide="move-horizontal"></i>
             <h3>Learn across time scales</h3>
             <p>
-              Random partitions expose prediction and action generation to
-              transitions of different durations.
+              Mixed-span goal supervision trains action generation toward goals
+              at different distances. Random action partitions train prediction
+              and action generation over variable-length chunks.
             </p>
           </article>
           <article class="idea reveal">
             <span class="idea-number">02</span><i data-lucide="waypoints"></i>
             <h3>Generate, then refine</h3>
             <p>
-              An autoregressive actor enables Direct control. ARCEM searches
-              residuals around its conditional outputs.
+              An autoregressive actor enables search-free Direct control.
+              Optional ARCEM refinement searches action residuals, feeding each
+              perturbed action into subsequent generation within the chunk.
             </p>
           </article>
           <article class="idea reveal">
@@ -242,8 +244,9 @@
             ><i data-lucide="sliders-horizontal"></i>
             <h3>Change the granularity</h3>
             <p>
-              Five- or ten-action chunks trade planning computation for temporal
-              resolution, without retraining.
+              Switching from five- to ten-action chunks reduces latent prediction
+              steps without retraining. Actions are still generated and executed
+              at the primitive-step level.
             </p>
           </article>
         </div>
