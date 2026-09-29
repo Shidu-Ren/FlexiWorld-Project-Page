@@ -591,13 +591,13 @@
         <div class="heading-row reveal">
           <h2>Where do the<br />gains come from?</h2>
           <p>
-            A closer look at action prediction, learned features, and search.
+            A closer look at action prediction and learned features.
           </p>
         </div>
 
         <article class="diagnostic-study" aria-labelledby="action-study-title">
           <div class="diagnostic-heading reveal">
-            <span class="eyebrow">01 / ACTION PREDICTION</span>
+            <span class="study-label">ACTION PREDICTION</span>
             <h3 id="action-study-title">Better action predictions at longer goal distances.</h3>
             <p>On PushT, FlexiWorld improves all four mean action-prediction metrics
               at D = 50, 75, and 100. INTACT predicts better at D = 25, while
@@ -619,7 +619,7 @@
 
         <article class="diagnostic-study" aria-labelledby="probe-study-title">
           <div class="diagnostic-heading reveal">
-            <span class="eyebrow">02 / FROZEN FEATURES</span>
+            <span class="study-label">FROZEN FEATURES</span>
             <h3 id="probe-study-title">Useful temporal and action information, without the actor.</h3>
             <p>Frozen-feature probes predict demonstrated time gaps better with
               FlexiWorld. Action-probe R<sup>2</sup> matches or exceeds INTACT
@@ -641,28 +641,6 @@
             clear actor-free control advantage: both models perform similarly with CEM alone.</p>
         </article>
 
-        <article class="diagnostic-study" aria-labelledby="recovery-study-title">
-          <div class="diagnostic-heading reveal">
-            <span class="eyebrow">03 / SEARCH AND REOBSERVATION</span>
-            <h3 id="recovery-study-title">Search helps, but can also lose a successful plan.</h3>
-            <p>On PushT, ARCEM gains 183 successes and loses 69 relative to Direct,
-              for a net gain of 114 in 1,200 paired evaluations. Gains on Cube are smaller.</p>
-          </div>
-          <figure class="paper-figure reveal">
-            <button class="image-zoom" data-image="assets/paired-recovery.png"
-              data-caption="Paired search and reobservation outcomes on PushT and Cube"
-              aria-label="Enlarge search and reobservation outcomes">
-              <img src="assets/paired-recovery.png" width="2400" height="1792" loading="lazy"
-                alt="PushT and Cube first-stage success, recovery after reobservation, and paired ARCEM-only versus Direct-only successes" />
-              <span class="zoom-icon"><i data-lucide="expand"></i></span>
-            </button>
-            <figcaption><span>APPENDIX E.1</span>
-              First-plan success, recovery after reobservation, and paired search gains and losses.
-            </figcaption>
-          </figure>
-          <p class="diagnostic-context">Predicted latent costs can misrank candidates,
-            so search does not improve every plan.</p>
-        </article>
       </section>
 
       <section class="resources-section section" id="resources">

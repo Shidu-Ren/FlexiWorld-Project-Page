@@ -2571,8 +2571,12 @@ dialog.goal-modal img {
 .diagnostic-heading {
   max-width: 900px;
 }
-.diagnostic-heading .eyebrow {
-  color: var(--green);
+.study-label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 .diagnostic-heading h3 {
   margin: 12px 0 16px;
