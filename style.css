@@ -786,7 +786,7 @@ nav a:hover:after {
 .mechanism-films {
   display: grid;
   gap: 36px;
-  width: min(85%, 840px);
+  width: min(75%, 760px);
   margin: 32px auto 48px;
 }
 .mechanism-film {
@@ -811,7 +811,7 @@ nav a:hover:after {
   line-height: 1.6;
 }
 .paper-figure {
-  width: min(85%, 840px);
+  width: min(75%, 760px);
   margin-inline: auto;
   margin-top: 38px;
 }
