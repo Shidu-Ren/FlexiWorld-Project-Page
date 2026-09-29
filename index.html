@@ -418,6 +418,32 @@
             Forcing exposes it to generated prefixes during training.
           </p>
         </div>
+        <div class="mechanism-films">
+          <figure class="mechanism-film reveal">
+            <h3>Mixed-span learning</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/mixed-span-poster.png" width="1280" height="500" aria-label="Mixed-span learning and joint JEPA training">
+              <source src="assets/mixed-span.mp4" type="video/mp4" />
+              <a href="assets/mixed-span.mp4">Mixed-span learning video</a>
+            </video>
+            <figcaption>Mixed goal spans and variable-length chunks jointly train the world model and actor.</figcaption>
+          </figure>
+          <figure class="mechanism-film reveal">
+            <h3>Autoregressive actor</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/ar-actor-poster.png" width="1280" height="500" aria-label="Parallel and autoregressive actors across consecutive chunks">
+              <source src="assets/ar-actor.mp4" type="video/mp4" />
+              <a href="assets/ar-actor.mp4">Autoregressive actor video</a>
+            </video>
+            <figcaption>Both methods predict states between chunks; FlexiWorld also feeds generated actions back within each chunk.</figcaption>
+          </figure>
+          <figure class="mechanism-film reveal">
+            <h3>ARCEM</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/arcem-poster.png" width="1280" height="500" aria-label="ARCEM residual search, elite selection, and distribution refitting">
+              <source src="assets/arcem.mp4" type="video/mp4" />
+              <a href="assets/arcem.mp4">ARCEM video</a>
+            </video>
+            <figcaption>Action-residual search with within-chunk feedback and latent prediction at chunk boundaries.</figcaption>
+          </figure>
+        </div>
         <figure class="paper-figure reveal">
           <button
             class="image-zoom"

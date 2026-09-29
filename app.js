@@ -447,13 +447,28 @@
     { threshold: 0 },
   );
   visible.observe($("#rollouts"));
+  const mechanismVideos = $$(".mechanism-film video");
+  const visibleMechanisms = new Set();
+  const mechanismObserver = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) visibleMechanisms.add(target);
+      else visibleMechanisms.delete(target);
+      if (isIntersecting && !motionPreference.matches && !document.hidden) {
+        target.play().catch(() => {});
+      } else target.pause();
+    });
+  }, { threshold: 0.35 });
+  mechanismVideos.forEach(video => mechanismObserver.observe(video));
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stopPlayback();
+    if (document.hidden) mechanismVideos.forEach(video => video.pause());
+    else if (!motionPreference.matches) visibleMechanisms.forEach(video => video.play().catch(() => {}));
   });
   motionPreference.addEventListener("change", () => {
     chunkPaused = motionPreference.matches;
     setChunkMotion();
     if (motionPreference.matches) document.body.classList.remove("js-motion");
+    if (motionPreference.matches) mechanismVideos.forEach(video => video.pause());
   });
 
   // Decorative chunk traces illustrate time scales, not experimental results.

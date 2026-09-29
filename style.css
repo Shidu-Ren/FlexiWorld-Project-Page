@@ -796,6 +796,32 @@ nav a:hover:after {
 .method-section {
   background: white;
 }
+.mechanism-films {
+  display: grid;
+  gap: 36px;
+  margin: 32px 0 48px;
+}
+.mechanism-film {
+  margin: 0;
+  min-width: 0;
+}
+.mechanism-film h3 {
+  margin: 0 0 14px;
+  font-size: 22px;
+}
+.mechanism-film video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 500;
+  background: #121719;
+}
+.mechanism-film figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
 .paper-figure {
   margin-top: 38px;
 }
