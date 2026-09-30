@@ -10,14 +10,15 @@ async function main() {
       const page = await browser.newPage({ viewport: { width, height: 1000 } });
       await page.goto(pathToFileURL(path.resolve(__dirname, '../index.html')).href);
       const videos = page.locator('.mechanism-film video');
-      assert.equal(await videos.count(), 3);
-      for (let i = 0; i < 3; i++) {
+      const expected = [[1600, 984, 17], [1280, 500, 15.6], [1280, 500, 28.6], [1280, 500, 28], [1280, 720, 13]];
+      assert.equal(await videos.count(), expected.length);
+      for (let i = 0; i < expected.length; i++) {
         const video = videos.nth(i);
         await video.scrollIntoViewIfNeeded();
-        await page.waitForFunction(i => {
+        await page.waitForFunction(({i, expected}) => {
           const v = document.querySelectorAll('.mechanism-film video')[i];
-          return v.videoWidth === 1280 && v.videoHeight === 500 && v.currentTime > 0;
-        }, i);
+          return v.videoWidth === expected[0] && v.videoHeight === expected[1] && Math.abs(v.duration - expected[2]) < 0.1 && v.currentTime > 0;
+        }, { i, expected: expected[i] });
         assert.ok(await video.evaluate(v => v.controls && v.muted && v.loop));
         const before = await video.evaluate(v => v.currentTime);
         await page.waitForTimeout(300);
@@ -25,6 +26,8 @@ async function main() {
         await page.locator('.mechanism-film').nth(i).screenshot({ path: path.resolve(__dirname, `../qa/mechanism-${width}-${i}.png`) });
       }
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      assert.ok(await page.evaluate(() => document.querySelector('#method').offsetTop < document.querySelector('#rollouts').offsetTop));
+      assert.ok(await page.evaluate(() => document.querySelector('#method .paper-figure').offsetTop < document.querySelector('.mechanism-films').offsetTop));
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.waitForTimeout(100);
       assert.ok(await videos.evaluateAll(items => items.every(v => v.paused)));

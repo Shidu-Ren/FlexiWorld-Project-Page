@@ -36,8 +36,8 @@
         >FlexiWorld<span class="brand-period">.</span></a
       >
       <nav aria-label="Main navigation" id="navigation">
-        <a href="#overview">Overview</a><a href="#rollouts">Demo</a
-        ><a href="#method">Method</a><a href="#results">Results</a
+        <a href="#overview">Overview</a><a href="#method">Method</a
+        ><a href="#rollouts">Demo</a><a href="#results">Results</a
         ><a href="#diagnostics">Diagnostics</a>
       </nav>
       <a
@@ -216,18 +216,14 @@
             </p>
           </div>
         </div>
-        <figure class="paper-figure teaser-figure reveal">
-          <button class="image-zoom" data-image="assets/teaser.png"
-            data-caption="Figure 1. FlexiWorld: flexible action chunks across multiple time scales"
-            aria-label="Enlarge FlexiWorld overview">
-            <img src="assets/teaser.png" width="2400" height="1476"
-              alt="FlexiWorld overview: training and planning interfaces, selected PushT configurations, and four-benchmark mean success"
-              loading="lazy" />
-            <span class="zoom-icon"><i data-lucide="expand"></i></span>
-          </button>
+        <figure class="paper-figure teaser-figure mechanism-film reveal">
+          <video class="teaser-video" controls muted loop playsinline preload="metadata" poster="assets/teaser.png" width="1600" height="984" aria-label="LeWM, INTACT, and FlexiWorld revealed in sequence, followed by paper results">
+            <source src="assets/teaser-reveal.mp4" type="video/mp4" />
+            <a href="assets/teaser-reveal.mp4">Animated overview</a>
+          </video>
           <figcaption><span>FIGURE 1 / OVERVIEW</span>
             Training and planning interfaces above; selected PushT configurations
-            and four-benchmark mean success below.
+            and four-benchmark mean success below. <a href="assets/teaser.png" target="_blank" rel="noopener">Full figure</a>
           </figcaption>
         </figure>
         <div class="idea-grid">
@@ -292,9 +288,109 @@
         </div>
       </section>
 
+      <section class="method-section section" id="method">
+        <div class="section-top">
+          <span class="eyebrow">03 / HOW IT WORKS</span
+          ><span class="section-tag"
+            >Predict in latent space. Act in the world.</span
+          >
+        </div>
+        <div class="heading-row reveal">
+          <h2>Flexible by training.<br />Autoregressive by design.</h2>
+          <p>
+            A causal action encoder handles variable-length chunks. An
+            autoregressive actor generates primitive actions, and Student
+            Forcing exposes it to generated prefixes during training.
+          </p>
+        </div>
+        <figure class="paper-figure reveal">
+          <button
+            class="image-zoom"
+            data-image="assets/training.png"
+            data-caption="FlexiWorld training architecture"
+            aria-label="Enlarge training architecture"
+          >
+            <img
+              src="assets/training.png"
+              width="2400" height="1198"
+              alt="FlexiWorld architecture: variable-duration transitions, causal action encoding, latent prediction, and autoregressive action generation"
+              loading="lazy"
+            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
+          </button>
+          <figcaption>
+            <span>FIGURE 2 / JOINT TRAINING</span> Variable-length transitions couple the
+            action encoder, latent predictor, and goal-conditioned actor.
+          </figcaption>
+        </figure>
+        <div class="mechanism-films">
+          <figure class="mechanism-film reveal">
+            <h3>Mixed-span learning</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/mixed-span-poster.png" width="1280" height="500" aria-label="Mixed-span learning and joint JEPA training">
+              <source src="assets/mixed-span.mp4" type="video/mp4" />
+              <a href="assets/mixed-span.mp4">Mixed-span learning video</a>
+            </video>
+            <figcaption>Mixed goal spans and variable-length chunks jointly train the world model and actor.</figcaption>
+          </figure>
+          <figure class="mechanism-film reveal">
+            <h3>Autoregressive actor</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/ar-actor-poster.png" width="1280" height="500" aria-label="Parallel and autoregressive actors across consecutive chunks">
+              <source src="assets/ar-actor.mp4" type="video/mp4" />
+              <a href="assets/ar-actor.mp4">Autoregressive actor video</a>
+            </video>
+            <figcaption>Both methods predict states between chunks; FlexiWorld also feeds generated actions back within each chunk.</figcaption>
+          </figure>
+          <figure class="mechanism-film reveal">
+            <h3>ARCEM</h3>
+            <video controls muted loop playsinline preload="metadata" poster="assets/arcem-poster.png?v=2" width="1280" height="500" aria-label="ARCEM residual search, elite selection, and distribution refitting">
+              <source src="assets/arcem.mp4?v=2" type="video/mp4" />
+              <a href="assets/arcem.mp4">ARCEM video</a>
+            </video>
+            <figcaption>Action-residual search with within-chunk feedback and latent prediction at chunk boundaries.</figcaption>
+          </figure>
+        </div>
+
+
+        <div class="arcem-story reveal">
+          <span class="eyebrow">ACTOR-RESIDUAL CROSS-ENTROPY METHOD</span>
+          <h3>Refine actions.<br />Let later actions respond.</h3>
+          <p>
+            ARCEM generalizes POPLIN's action-residual replanning to
+            autoregressive chunks. Each perturbed action becomes part of the
+            prefix for subsequent actions; latent predictions carry its effects
+            across chunks.
+          </p>
+          <div class="arcem-steps">
+            <span><b>01</b> Sample residuals</span
+            ><i data-lucide="arrow-right"></i
+            ><span><b>02</b> Generate candidates</span
+            ><i data-lucide="arrow-right"></i
+            ><span><b>03</b> Score &amp; refit</span>
+          </div>
+        </div>
+        <figure class="paper-figure reveal">
+          <button
+            class="image-zoom"
+            data-image="assets/arcem.png"
+            data-caption="ARCEM candidate generation and refinement"
+            aria-label="Enlarge ARCEM architecture"
+          >
+            <img
+              src="assets/arcem.png"
+              width="2400" height="675"
+              alt="ARCEM: action residuals affect subsequent autoregressive actions; latent goal costs select elites for CEM refinement"
+              loading="lazy"
+            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
+          </button>
+          <figcaption>
+            <span>FIGURE 3 / TEST-TIME SEARCH</span> Within-chunk action feedback.
+            Chunk-level latent prediction. No residual-policy training.
+          </figcaption>
+        </figure>
+      </section>
+
       <section class="rollouts-section section" id="rollouts">
         <div class="section-top">
-          <span class="eyebrow">03 / RECORDED EXECUTION</span
+          <span class="eyebrow">04 / RECORDED EXECUTION</span
           ><span class="section-tag">Matched starts. Matched goals.</span>
         </div>
         <div class="heading-row reveal">
@@ -304,6 +400,12 @@
             below comes from the recorded benchmark evaluations.
           </p>
         </div>
+        <figure class="paper-figure mechanism-film reveal">
+          <video class="comparison-video" controls muted loop playsinline preload="metadata" poster="assets/benchmark-comparison-poster.png" width="1280" height="720" aria-label="Four benchmarks: INTACT Guarded-A and FlexiWorld ARCEM with matched starts and goals">
+            <source src="assets/benchmark-comparison.mp4" type="video/mp4" />
+            <a href="assets/benchmark-comparison.mp4">Benchmark comparison video</a>
+          </video>
+        </figure>
         <div
           class="task-tabs"
           role="tablist"
@@ -381,105 +483,6 @@
             <button id="retry-media">Retry recordings</button>
           </p>
         </div>
-      </section>
-
-      <section class="method-section section" id="method">
-        <div class="section-top">
-          <span class="eyebrow">04 / HOW IT WORKS</span
-          ><span class="section-tag"
-            >Predict in latent space. Act in the world.</span
-          >
-        </div>
-        <div class="heading-row reveal">
-          <h2>Flexible by training.<br />Autoregressive by design.</h2>
-          <p>
-            A causal action encoder handles variable-length chunks. An
-            autoregressive actor generates primitive actions, and Student
-            Forcing exposes it to generated prefixes during training.
-          </p>
-        </div>
-        <div class="mechanism-films">
-          <figure class="mechanism-film reveal">
-            <h3>Mixed-span learning</h3>
-            <video controls muted loop playsinline preload="metadata" poster="assets/mixed-span-poster.png" width="1280" height="500" aria-label="Mixed-span learning and joint JEPA training">
-              <source src="assets/mixed-span.mp4" type="video/mp4" />
-              <a href="assets/mixed-span.mp4">Mixed-span learning video</a>
-            </video>
-            <figcaption>Mixed goal spans and variable-length chunks jointly train the world model and actor.</figcaption>
-          </figure>
-          <figure class="mechanism-film reveal">
-            <h3>Autoregressive actor</h3>
-            <video controls muted loop playsinline preload="metadata" poster="assets/ar-actor-poster.png" width="1280" height="500" aria-label="Parallel and autoregressive actors across consecutive chunks">
-              <source src="assets/ar-actor.mp4" type="video/mp4" />
-              <a href="assets/ar-actor.mp4">Autoregressive actor video</a>
-            </video>
-            <figcaption>Both methods predict states between chunks; FlexiWorld also feeds generated actions back within each chunk.</figcaption>
-          </figure>
-          <figure class="mechanism-film reveal">
-            <h3>ARCEM</h3>
-            <video controls muted loop playsinline preload="metadata" poster="assets/arcem-poster.png" width="1280" height="500" aria-label="ARCEM residual search, elite selection, and distribution refitting">
-              <source src="assets/arcem.mp4" type="video/mp4" />
-              <a href="assets/arcem.mp4">ARCEM video</a>
-            </video>
-            <figcaption>Action-residual search with within-chunk feedback and latent prediction at chunk boundaries.</figcaption>
-          </figure>
-        </div>
-        <figure class="paper-figure reveal">
-          <button
-            class="image-zoom"
-            data-image="assets/training.png"
-            data-caption="FlexiWorld training architecture"
-            aria-label="Enlarge training architecture"
-          >
-            <img
-              src="assets/training.png"
-              width="2400" height="1198"
-              alt="FlexiWorld architecture: variable-duration transitions, causal action encoding, latent prediction, and autoregressive action generation"
-              loading="lazy"
-            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
-          </button>
-          <figcaption>
-            <span>FIGURE 2 / JOINT TRAINING</span> Variable-length transitions couple the
-            action encoder, latent predictor, and goal-conditioned actor.
-          </figcaption>
-        </figure>
-
-        <div class="arcem-story reveal">
-          <span class="eyebrow">ACTOR-RESIDUAL CROSS-ENTROPY METHOD</span>
-          <h3>Refine actions.<br />Let later actions respond.</h3>
-          <p>
-            ARCEM generalizes POPLIN's action-residual replanning to
-            autoregressive chunks. Each perturbed action becomes part of the
-            prefix for subsequent actions; latent predictions carry its effects
-            across chunks.
-          </p>
-          <div class="arcem-steps">
-            <span><b>01</b> Sample residuals</span
-            ><i data-lucide="arrow-right"></i
-            ><span><b>02</b> Generate candidates</span
-            ><i data-lucide="arrow-right"></i
-            ><span><b>03</b> Score &amp; refit</span>
-          </div>
-        </div>
-        <figure class="paper-figure reveal">
-          <button
-            class="image-zoom"
-            data-image="assets/arcem.png"
-            data-caption="ARCEM candidate generation and refinement"
-            aria-label="Enlarge ARCEM architecture"
-          >
-            <img
-              src="assets/arcem.png"
-              width="2400" height="675"
-              alt="ARCEM: action residuals affect subsequent autoregressive actions; latent goal costs select elites for CEM refinement"
-              loading="lazy"
-            /><span class="zoom-icon"><i data-lucide="expand"></i></span>
-          </button>
-          <figcaption>
-            <span>FIGURE 3 / TEST-TIME SEARCH</span> Within-chunk action feedback.
-            Chunk-level latent prediction. No residual-policy training.
-          </figcaption>
-        </figure>
       </section>
 
       <section class="results-section section" id="results">

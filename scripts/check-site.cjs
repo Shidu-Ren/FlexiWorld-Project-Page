@@ -107,7 +107,7 @@ async function main() {
   assert.equal(await page.locator("#top canvas").count(), 1);
   assert.equal(await page.locator("#top").evaluate((e) => getComputedStyle(e).backgroundColor), "rgb(21, 23, 20)");
   assert.equal((await page.locator("#paper-abstract").textContent()).replace(/\s+/g, " ").trim(), paper.abstract);
-  assert.equal(await page.locator(".paper-figure").count(), 5);
+  assert.equal(await page.locator(".paper-figure").count(), 6);
   assert.equal(await page.locator(".diagnostic-study").count(), 2);
   assert.equal(await page.locator('#recovery-study-title').count(), 0);
   assert.equal(await page.locator('.diagnostic-heading .eyebrow').count(), 0);

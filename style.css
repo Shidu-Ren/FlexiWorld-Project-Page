@@ -804,6 +804,13 @@ nav a:hover:after {
   aspect-ratio: 1280 / 500;
   background: #121719;
 }
+.mechanism-film .teaser-video {
+  aspect-ratio: 1600 / 984;
+  background: #ffffff;
+}
+.mechanism-film .comparison-video {
+  aspect-ratio: 16 / 9;
+}
 .mechanism-film figcaption {
   margin-top: 12px;
   color: var(--muted);
