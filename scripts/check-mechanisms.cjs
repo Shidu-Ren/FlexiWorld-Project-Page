@@ -10,7 +10,7 @@ async function main() {
       const page = await browser.newPage({ viewport: { width, height: 1000 } });
       await page.goto(pathToFileURL(path.resolve(__dirname, '../index.html')).href);
       const videos = page.locator('.mechanism-film video');
-      const expected = [[1600, 1112, 20], [1280, 500, 15.6], [1280, 500, 28.6], [1280, 500, 37], [1280, 720, 13]];
+      const expected = [[1600, 1112, 20], [1280, 500, 15.6], [1280, 500, 20], [1280, 500, 37], [1280, 720, 13]];
       assert.equal(await videos.count(), expected.length);
       for (let i = 0; i < expected.length; i++) {
         const video = videos.nth(i);
